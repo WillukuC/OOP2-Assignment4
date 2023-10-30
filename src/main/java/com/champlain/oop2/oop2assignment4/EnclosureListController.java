@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
-public class animalCollectionController {
+public class EnclosureListController {
     @FXML
     private ListView collectionView;
 
@@ -17,7 +17,7 @@ public class animalCollectionController {
     private Button backExitButton;
 
     ObservableList<String> collections = FXCollections.observableArrayList("Lions", "Tigers", "Cougars");
-    ListView<String> collectionView = new ListView<String>(collections);
+//    ListView<String> collectionView = new ListView<String>(collections);
 
 }
 
