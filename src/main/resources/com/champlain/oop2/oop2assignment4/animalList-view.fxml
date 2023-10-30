@@ -40,7 +40,7 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="373.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.champlain.oop2.oop2assignment4.EnclosureController">
+      fx:controller="com.champlain.oop2.oop2assignment4.AnimalListController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="346.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
       <children>
