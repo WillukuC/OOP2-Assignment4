@@ -43,7 +43,7 @@
       <children>
             <Button fx:id="viewButton" layoutX="261.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="View" />
             <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false" text="Back / Exit" />
-            <ListView fx:id="listView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0" />
+            <ListView fx:id="collectionView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0" />
       </children>
     </AnchorPane>
   </children>
