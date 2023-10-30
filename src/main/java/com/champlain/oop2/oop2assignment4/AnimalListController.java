@@ -28,7 +28,5 @@ public class AnimalListController {
 
     @FXML
     protected void onBackButtonClick() {
-        Alert backAlert = new Alert(Alert.AlertType.WARNING, "Back");
-        backAlert.showAndWait();
     }
 }
