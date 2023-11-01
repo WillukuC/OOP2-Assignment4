@@ -2,18 +2,29 @@ package com.champlain.oop2.oop2assignment4;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AnimalDetailsController {
-    @FXML
-    private TextField nameTextField;
+
+    /*@FXML
+    private AnimalCollectionViewController aParent;*/
 
     @FXML
-    private TextField weightTextField;
+    private TextField aNameTextField;
 
     @FXML
-    private TextField ageTextField;
+    private TextField aWeightTextField;
+
+    @FXML
+    private TextField aAgeTextField;
+
+    @FXML
+    private Button aSaveButton;
+
+    @FXML
+    private Button aBackButton;
 
     @FXML
     protected void onSaveButtonClick() {
