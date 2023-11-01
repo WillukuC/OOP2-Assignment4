@@ -11,6 +11,8 @@ public class AnimalDetailsController {
     /*@FXML
     private AnimalCollectionViewController aParent;*/
 
+    private Animal aAnimal;
+
     @FXML
     private TextField aNameTextField;
 
@@ -28,13 +30,23 @@ public class AnimalDetailsController {
 
     @FXML
     protected void onSaveButtonClick() {
-        Alert viewAlert = new Alert(Alert.AlertType.WARNING, "Save");
-        viewAlert.showAndWait();
+        this.aAnimal.setName(this.aNameTextField.getText());
+        this.aAnimal.setWeight(Double.valueOf(this.aWeightTextField.getText()));
+        this.aAnimal.setAge(Double.valueOf(this.aAgeTextField.getText()));
+
+        this.onBackButtonClick();
     }
 
     @FXML
     protected void onBackButtonClick() {
         Alert viewAlert = new Alert(Alert.AlertType.WARNING, "Back");
         viewAlert.showAndWait();
+    }
+
+    public void setAnimal(Animal pAnimal) {
+        this.aAnimal = pAnimal;
+        this.aNameTextField.setText(pAnimal.getName());
+        this.aWeightTextField.setText(String.valueOf(pAnimal.getWeight()));
+        this.aAgeTextField.setText(String.valueOf(pAnimal.getAge()));
     }
 }
