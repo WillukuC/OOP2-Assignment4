@@ -64,15 +64,15 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField id="nameTextField" fx:id="nameTextField" layoutX="121.0" layoutY="103.0" />
-            <TextField id="weightTextField" fx:id="weightTextField" layoutX="121.0" layoutY="164.0" />
-            <TextField id="ageTextField" fx:id="ageTextField" layoutX="121.0" layoutY="228.0" />
-            <Button id="saveButton" fx:id="saveButton" layoutX="87.0" layoutY="289.0" mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save">
+            <TextField id="nameTextField" fx:id="aNameTextField" layoutX="121.0" layoutY="103.0" />
+            <TextField id="weightTextField" fx:id="aWeightTextField" layoutX="121.0" layoutY="164.0" />
+            <TextField id="ageTextField" fx:id="aAgeTextField" layoutX="121.0" layoutY="228.0" />
+            <Button id="saveButton" fx:id="aSaveButton" layoutX="87.0" layoutY="289.0" mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="backButton" fx:id="backButton" layoutX="231.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back">
+            <Button id="backButton" fx:id="aBackButton" layoutX="231.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back">
                <font>
                   <Font size="14.0" />
                </font>
