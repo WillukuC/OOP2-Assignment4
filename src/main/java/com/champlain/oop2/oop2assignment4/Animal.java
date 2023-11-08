@@ -1,7 +1,6 @@
 package com.champlain.oop2.oop2assignment4;
 
 public class Animal {
-<<<<<<< Updated upstream
 
     private String aName;
 
@@ -33,38 +32,13 @@ public class Animal {
         return aAge;
     }
 
-    public void setAge(Double aAge) {
-        this.aAge = aAge;
-=======
-    private String name;
-    private String species;
-    private int age;
-    private String enclosure;
-    private int weight;
+    public void setAge(Double aAge) { this.aAge = aAge; }
 
-    public String getName(){
-        return name;
-    }
-    public String getSpecies(){
-        return species;
-    }
-    public int getAge(){
-        return age;
-    }
-    public String getEnclosure(){
-        return enclosure;
-    }
-    public void setName(String pName){
-        this.name = pName;
-    }
-    public void setSpecies(String pSpecies){
-        this.species = pSpecies;
-    }
-    public void setAge(int pAge){
-        this.age = pAge;
-    }
-    public void setEnclosure(String pEnclosure){
-        this.enclosure = pEnclosure;
->>>>>>> Stashed changes
-    }
+    public String getSpecies() { return aSpecies; }
+
+    public void setSpecies(String aSpecies) { this.aSpecies = aSpecies; }
+
+    public String getEnclosure() { return aEnclosure; }
+
+    public void setEnclosure(String aEnclosure) { this.aEnclosure = aEnclosure; }
 }
