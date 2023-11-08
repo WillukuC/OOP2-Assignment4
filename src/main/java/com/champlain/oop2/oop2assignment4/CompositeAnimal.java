@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompositeAnimal implements AnimalCollection {
-    private List<AnimalCollection> aCollections = new ArrayList<AnimalCollection>();
+    private final List<AnimalCollection> aCollections = new ArrayList<AnimalCollection>();
 
     public void addCollection(AnimalCollection pCollection) {
         this.aCollections.add(pCollection);

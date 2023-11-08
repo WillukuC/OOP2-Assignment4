@@ -20,6 +20,9 @@ public class ZooManagementApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public void importAnimals(){
+
+    }
 
     public static void main(String[] args) {
         launch();
