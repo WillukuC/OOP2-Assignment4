@@ -12,7 +12,7 @@ public class AnimalDetailsController {
     /*@FXML
     private AnimalCollectionViewController aParent;*/
 
-    private Animal aAnimal;
+    private Animal aAnimal = new Animal();
 
     private Enclosure aEnclosure;
 
@@ -25,11 +25,7 @@ public class AnimalDetailsController {
     @FXML
     private TextField aAgeTextField;
 
-    @FXML
-    private Button aSaveButton;
-
-    @FXML
-    private Button aBackButton;
+    private boolean isNew = true;
 
     @FXML
     protected void onSaveButtonClick() {
@@ -43,7 +39,9 @@ public class AnimalDetailsController {
             return;
         }
 
-        /*this.aEnclosure.addAnimal(aAnimal);*/
+        if(this.isNew){
+            this.aEnclosure.addAnimal(this.aAnimal);
+        }
 
         this.onBackButtonClick();
     }
@@ -55,9 +53,14 @@ public class AnimalDetailsController {
     }
 
     public void setAnimal(Animal pAnimal) {
+        this.isNew = false;
         this.aAnimal = pAnimal;
         this.aNameTextField.setText(pAnimal.getName());
         this.aWeightTextField.setText(String.valueOf(pAnimal.getWeight()));
         this.aAgeTextField.setText(String.valueOf(pAnimal.getAge()));
+    }
+
+    public void setEnclosure(Enclosure pEnclosure) {
+        this.aEnclosure = pEnclosure;
     }
 }
