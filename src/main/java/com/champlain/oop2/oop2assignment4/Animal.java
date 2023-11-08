@@ -2,6 +2,9 @@ package com.champlain.oop2.oop2assignment4;
 
 public class Animal {
 
+	public Animal(String pName){
+        this.setName(pName);
+    }
     private String aName;
 
     private String aSpecies;
@@ -23,7 +26,7 @@ public class Animal {
     }
 
     public void setWeight(Double pWeight) {
-        if(pWeight < 0) {
+		if(pWeight < 0) {
             throw new IllegalArgumentException("The weight can't be smaller than 0");
         } if(pWeight > 1000) {
             throw new IllegalArgumentException("The weight can't be greater than 1000");
@@ -43,7 +46,7 @@ public class Animal {
             this.aAge = pAge;
         }
     }
-
+    
     public String getSpecies() { return aSpecies; }
 
     public void setSpecies(String aSpecies) { this.aSpecies = aSpecies; }
