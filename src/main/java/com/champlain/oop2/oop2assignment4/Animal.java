@@ -7,8 +7,6 @@ public class Animal {
     }
     private String aName;
 
-    private String aSpecies;
-
     private Double aWeight;
 
     private Double aAge;
@@ -34,8 +32,4 @@ public class Animal {
     }
 
     public void setAge(Double aAge) { this.aAge = aAge; }
-
-    public String getSpecies() { return aSpecies; }
-
-    public void setSpecies(String aSpecies) { this.aSpecies = aSpecies; }
 }
