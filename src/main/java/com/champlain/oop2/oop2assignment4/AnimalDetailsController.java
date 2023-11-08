@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AnimalDetailsController {
 
@@ -12,6 +13,8 @@ public class AnimalDetailsController {
     private AnimalCollectionViewController aParent;*/
 
     private Animal aAnimal;
+
+    private Enclosure aEnclosure;
 
     @FXML
     private TextField aNameTextField;
@@ -30,17 +33,25 @@ public class AnimalDetailsController {
 
     @FXML
     protected void onSaveButtonClick() {
-        this.aAnimal.setName(this.aNameTextField.getText());
-        this.aAnimal.setWeight(Double.valueOf(this.aWeightTextField.getText()));
-        this.aAnimal.setAge(Double.valueOf(this.aAgeTextField.getText()));
+        try {
+            this.aAnimal.setName(this.aNameTextField.getText());
+            this.aAnimal.setWeight(Double.valueOf(this.aWeightTextField.getText()));
+            this.aAnimal.setAge(Double.valueOf(this.aAgeTextField.getText()));
+        } catch (IllegalArgumentException exception) {
+            Alert viewAlert = new Alert(Alert.AlertType.WARNING, exception.getMessage());
+            viewAlert.showAndWait();
+            return;
+        }
+
+        /*this.aEnclosure.addAnimal(aAnimal);*/
 
         this.onBackButtonClick();
     }
 
     @FXML
     protected void onBackButtonClick() {
-        Alert viewAlert = new Alert(Alert.AlertType.WARNING, "Back");
-        viewAlert.showAndWait();
+        Stage stage = (Stage) aNameTextField.getScene().getWindow();
+        stage.close();
     }
 
     public void setAnimal(Animal pAnimal) {
