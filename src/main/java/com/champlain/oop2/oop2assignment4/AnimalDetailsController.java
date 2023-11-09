@@ -52,6 +52,7 @@ public class AnimalDetailsController {
         stage.close();
     }
 
+    /*Setting the data from the selected entity and turning of the isNew boolean*/
     public void setAnimal(Animal pAnimal) {
         this.isNew = false;
         this.aAnimal = pAnimal;
@@ -60,6 +61,7 @@ public class AnimalDetailsController {
         this.aAgeTextField.setText(String.valueOf(pAnimal.getAge()));
     }
 
+    /*Setting which enclosure, a new animal is suppose to be added to*/
     public void setEnclosure(Enclosure pEnclosure) {
         this.aEnclosure = pEnclosure;
     }
