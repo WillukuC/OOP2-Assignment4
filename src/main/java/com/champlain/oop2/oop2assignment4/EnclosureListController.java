@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class EnclosureListController {
-//    @FXML
-//    ObservableList<String> enclosuresTop = FXCollections.observableArrayList("Lions", "Tigers", "Cougars");
+
     @FXML
     ListView<String> enclosuresView = new ListView<String>();
 
@@ -33,12 +32,14 @@ public class EnclosureListController {
         nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
         nextStage.showAndWait();
     }
+
+    // Imports all current animals in the zoo
     public void importAnimals() {
-        Enclosure Lion = new Enclosure();
-        Lion.setName("Lion");
-        Lion.addAnimal(new Lion("Simba"));
-        Lion.addAnimal(new Lion("Mufasa"));
-        Lion.addAnimal(new Lion("Nala"));
+        Enclosure lions = new Enclosure();
+        lions.setName("Lion");
+        lions.addAnimal(new Lion("Simba"));
+        lions.addAnimal(new Lion("Mufasa"));
+        lions.addAnimal(new Lion("Nala"));
 
         Enclosure tigerHabitat = new Enclosure();
         tigerHabitat.setName("Tigers Habitat");
@@ -74,7 +75,7 @@ public class EnclosureListController {
 
         CompositeAnimal myCollection = new CompositeAnimal();
         myCollection.setName("Big Cats");
-        myCollection.addCollection(Lion);
+        myCollection.addCollection(lions);
         myCollection.addCollection(tigers);
         myCollection.addCollection(cougars);
     }
@@ -84,7 +85,7 @@ public class EnclosureListController {
     private String pEnclosure;
     public String getEnclosure() { return aEnclosure; }
 
-    // public void setEnclosure(String aEnclosure) { this.aEnclosure = aEnclosure; }
+    // Updates list of animals and enclosures
     public void updateList(){
 
     }
@@ -92,9 +93,12 @@ public class EnclosureListController {
         this.aEnclosure = pEnclosure;
         this.updateList();
     }
+
+    // Sets the current list's selected enclosure/compositeanimal to open in the next window
     public void setSelectedEnclosure(String aEnclosure){
 
     }
+    // Gets current list's selected enclosure/compositeanimal
     public String getSelectedEnclosure(){
         pEnclosure = enclosuresView.getSelectionModel().getSelectedItem();
 
