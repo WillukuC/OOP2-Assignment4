@@ -10,14 +10,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class EnclosureListController {
 //    @FXML
 //    ObservableList<String> enclosuresTop = FXCollections.observableArrayList("Lions", "Tigers", "Cougars");
     @FXML
-    ListView<String> enclosuresView = new ListView<String>();
+    ListView<CompositeAnimal> enclosuresView = new ListView<>();
+    private Button backExitButton;
+    private String aEnclosure;
+    private String pEnclosure;
+    public String getEnclosure() { return aEnclosure; }
+    @FXML
+    protected void initialize() {
+        CompositeAnimal zooCollection = new CompositeAnimal("Zoo");
+        importAnimals(zooCollection);
+    }
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
@@ -28,65 +36,55 @@ public class EnclosureListController {
         Scene nextScene = new Scene(view, 500, 500);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
-        nextStage.setTitle(pEnclosure.getName());
+        nextStage.setTitle("Placeholder");
         nextStage.initModality(Modality.WINDOW_MODAL);
         nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
         nextStage.showAndWait();
     }
-    public void importAnimals() {
-        Enclosure Lion = new Enclosure();
-        Lion.setName("Lion");
-        Lion.addAnimal(new Lion("Simba"));
-        Lion.addAnimal(new Lion("Mufasa"));
-        Lion.addAnimal(new Lion("Nala"));
+    public void importAnimals(CompositeAnimal pCollection) {
+        // Lions
+        Enclosure Lion = new Enclosure("Lion");
+        // Lion.addAnimal(new Lion("Simba"));
+        // Lion.addAnimal(new Lion("Mufasa"));
+        // Lion.addAnimal(new Lion("Nala"));
 
-        Enclosure tigerHabitat = new Enclosure();
-        tigerHabitat.setName("Tigers Habitat");
-        tigerHabitat.addAnimal(new Tiger("Rajah"));
-        tigerHabitat.addAnimal(new Tiger("Shere Khan"));
+        // Tigers
+        Enclosure tigerHabitat = new Enclosure("Tiger Habitat");
+        // tigerHabitat.addAnimal(new Tiger("Rajah"));
+        // tigerHabitat.addAnimal(new Tiger("Shere Khan"));
 
-        Enclosure tigerCubs = new Enclosure();
-        tigerCubs.setName("Tiger Cubs");
-        tigerCubs.addAnimal(new Tiger("Tala (Mother)"));
-        tigerCubs.addAnimal(new Tiger("Ravi"));
-        tigerCubs.addAnimal(new Tiger("Kali"));
-        tigerCubs.addAnimal(new Tiger("Indra"));
+        Enclosure tigerCubs = new Enclosure("Tiger Cubs");
+        // tigerCubs.addAnimal(new Tiger("Tala (Mother)"));
+        // tigerCubs.addAnimal(new Tiger("Ravi"));
+        // tigerCubs.addAnimal(new Tiger("Kali"));
+        // tigerCubs.addAnimal(new Tiger("Indra"));
 
-        CompositeAnimal tigers = new CompositeAnimal();
-        tigers.setName("Tigers");
-        tigers.addCollection(tigerHabitat);
-        tigers.addCollection(tigerCubs);
+        CompositeAnimal tigers = new CompositeAnimal("Tigers");
+        tigers.addObject(tigerHabitat);
+        tigers.addObject(tigerCubs);
 
-        Enclosure cougarMedical = new Enclosure();
-        cougarMedical.setName("Cougar Medical Care");
-        cougarMedical.addAnimal(new Cougar("Sierra"));
+        // Cougars
+        Enclosure cougarMedical = new Enclosure("Cougar Medical Care");
+        // cougarMedical.addAnimal(new Cougar("Sierra"));
 
-        Enclosure cougarHabitat = new Enclosure();
-        cougarHabitat.setName("Cougars Habitat");
-        cougarHabitat.addAnimal(new Cougar("Rocky"));
-        cougarHabitat.addAnimal(new Cougar("Luna"));
-        cougarHabitat.addAnimal(new Cougar("Lenny"));
+        Enclosure cougarHabitat = new Enclosure("Cougar Habitat");
+        // cougarHabitat.addAnimal(new Cougar("Rocky"));
+        // cougarHabitat.addAnimal(new Cougar("Luna"));
+        // cougarHabitat.addAnimal(new Cougar("Lenny"));
 
-        CompositeAnimal cougars = new CompositeAnimal();
-        cougars.setName("Cougars");
-        cougars.addCollection(cougarHabitat);
-        cougars.addCollection(cougarMedical);
+        CompositeAnimal cougars = new CompositeAnimal("Cougars");
+        cougars.addObject(cougarHabitat);
+        cougars.addObject(cougarMedical);
 
-        CompositeAnimal myCollection = new CompositeAnimal();
-        myCollection.setName("Big Cats");
-        myCollection.addCollection(Lion);
-        myCollection.addCollection(tigers);
-        myCollection.addCollection(cougars);
+        // Zoo
+        pCollection.setName("Big Cats");
+        pCollection.addObject(Lion);
+        pCollection.addObject(tigers);
+        pCollection.addObject(cougars);
     }
-    @FXML
-    private Button backExitButton;
-    private String aEnclosure;
-    private String pEnclosure;
-    public String getEnclosure() { return aEnclosure; }
 
     // public void setEnclosure(String aEnclosure) { this.aEnclosure = aEnclosure; }
     public void updateList(){
-
     }
     public void setEnclosure(String aEnclosure){
         this.aEnclosure = pEnclosure;
@@ -96,8 +94,7 @@ public class EnclosureListController {
 
     }
     public String getSelectedEnclosure(){
-        pEnclosure = enclosuresView.getSelectionModel().getSelectedItem();
-
+        pEnclosure = String.valueOf(enclosuresView.getSelectionModel().getSelectedItem());
         return pEnclosure;
     }
 }
