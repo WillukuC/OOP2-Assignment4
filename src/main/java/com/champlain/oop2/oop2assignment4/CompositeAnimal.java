@@ -3,22 +3,86 @@ package com.champlain.oop2.oop2assignment4;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CompositeAnimal can be comprised of both CompositeAnimals and Enclosures
+ * This is basically a list of lists.
+ */
 public class CompositeAnimal implements AnimalCollection {
-    private final List<AnimalCollection> aCollections = new ArrayList<AnimalCollection>();
+    /**
+     * The list that CompositeAnimal contains.
+     * Either CompositeAnimal or Enclosures.
+     */
+    private final List<Object> aCollections;
 
-    public void addCollection(AnimalCollection pCollection) {
-        this.aCollections.add(pCollection);
+    /**
+     * The name of the CompositeAnimal group.
+     */
+    private String aName;
+
+    /**
+     * CompositeAnimal constructor
+     */
+    public CompositeAnimal(String pName) {
+        aCollections = new ArrayList<>();
+        aName = pName;
     }
 
-    public void removeCollection(AnimalCollection pCollection) {
-        this.aCollections.remove(pCollection);
+    /**
+     * Allows adding CompositeAnimal or Enclosure to aCollections.
+     *
+     * @param pObject The object to add to the list. Must be either CompositeAnimal or Enclosure.
+     * @throws IllegalArgumentException if pObject is neither CompositeAnimal or Enclosure
+     */
+    public void addObject(Object pObject) {
+        if (pObject instanceof CompositeAnimal || pObject instanceof Enclosure) {
+            aCollections.add(pObject);
+        } else {
+            throw new IllegalArgumentException("Object not supported.");
+        }
     }
 
+    /**
+     * Allows removing an object from aCollections.
+     *
+     * @param pObject The object to remove from the list.
+     */
+    public void removeObject(Object pObject) {
+        aCollections.remove(pObject);
+    }
+
+    /**
+     * Sets the name of the CompositeAnimal
+     *
+     * @param pName New name
+     */
     @Override
-    public String showAllAnimals(){
+    public void setName(String pName) {
+        this.aName = pName;
+    }
+
+    /**
+     * Gets the name of the CompositeAnimal
+     *
+     * @return the name of CompositeAnimal
+     */
+    @Override
+    public String getName() {
+        return this.aName;
+    }
+
+    /**
+     * Shows all the Collections in the current CompositeAnimal
+     *
+     * @return a String of all the Collections together
+     */
+    @Override
+    public String showAllAnimals() {
         StringBuilder allAnimals = new StringBuilder();
-        for (AnimalCollection currentCollection : aCollections) {
+        for (Object currentCollection : aCollections) {
             allAnimals.append(currentCollection.toString());
+            if (!(allAnimals.indexOf(String.valueOf(currentCollection)) == aCollections.size() - 1)) {
+                allAnimals.append(", ");
+            }
         }
         return allAnimals.toString();
     }
