@@ -38,59 +38,26 @@ public class EnclosureListController {
 
     @FXML
     protected void initialize() {
-        displayListView(zooCollection.getList());
+        importAnimals(zooCollection);
+        displayListView(zooCollection);
         enclosuresListView.getSelectionModel().select(0);
     }
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
-        if (enclosuresListView.getSelectionModel().getSelectedIndex() < 0) {
-            Alert selectionAlert = new Alert(Alert.AlertType.WARNING, "Please select an enclosure.");
-            selectionAlert.showAndWait();
-        } else {
-
-            String selectedItemName = enclosuresListView.getSelectionModel().getSelectedItem().toString();
-            CompositeAnimal<Object> placeholderCompositeAnimal;
-            Enclosure<Animal> placeholderEnclosure;
-
-            for (int i = 0; i < zooCollection.getList().size() - 1; i++) {
-                Object tempObject = zooCollection.getList().get(i);
-                if (tempObject instanceof CompositeAnimal && Objects.equals(((CompositeAnimal) tempObject).getName(), selectedItemName)) {
-                    placeholderCompositeAnimal = (CompositeAnimal) tempObject;
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
-                    Parent view = fxmlLoader.load();
-                    EnclosureListController newEnclosureListController = fxmlLoader.getController();
-                    newEnclosureListController.zooCollection = placeholderCompositeAnimal;
-                    Scene nextScene = new Scene(view);
-                    Stage nextStage = new Stage();
-                    nextStage.setScene(nextScene);
-                    nextStage.setTitle(placeholderCompositeAnimal.getName());
-                    nextStage.initModality(Modality.WINDOW_MODAL);
-                    nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-                    nextStage.showAndWait();
-
-                    break;
-                } else if (tempObject instanceof Enclosure && Objects.equals(((Enclosure) tempObject).getName(), selectedItemName)) {
-                    placeholderEnclosure = (Enclosure) tempObject;
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
-                    Parent view = fxmlLoader.load();
-                    AnimalListController newAnimalListController = fxmlLoader.getController();
-                    newAnimalListController.aEnclosure = placeholderEnclosure;
-                    Scene nextScene = new Scene(view);
-                    Stage nextStage = new Stage();
-                    nextStage.setScene(nextScene);
-                    nextStage.setTitle(placeholderEnclosure.getName());
-                    nextStage.initModality(Modality.WINDOW_MODAL);
-                    nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-                    nextStage.showAndWait();
-
-                    break;
-                }
-            }
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosure-view.fxml"));
+        Parent view = fxmlLoader.load();
+        EnclosureListController newEnclosureViewController = fxmlLoader.getController();
+        newEnclosureViewController.setEnclosure(getSelectedEnclosure());
+        Scene nextScene = new Scene(view, 500, 500);
+        Stage nextStage = new Stage();
+        nextStage.setScene(nextScene);
+        nextStage.setTitle("PENIS");
+        nextStage.initModality(Modality.WINDOW_MODAL);
+        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+        nextStage.showAndWait();
     }
+
 
     private boolean isCompositeAnimal(String enclosureName) {
         for (Object obj : zooCollection.getList()) {
@@ -112,29 +79,7 @@ public class EnclosureListController {
      * @param pList the CompositeAnimal to display
      */
     public void displayListView(List<Object> pList) {
-        // Initializes the placeholder list for contents to be displayed.
-        List<String> content = new ArrayList<>();
-
-        // Steps through pList
-        for (Object o : pList) {
-            // Initializes listItem, which will be added to "content".
-            String listItem = "";
-
-            // Gets name of the pList object, which can only be
-            // either a CompositeAnimal or an Enclosure. Must
-            // typecast "o" if the .getName() method is to be used.
-            if (o instanceof CompositeAnimal) {
-                listItem = ((CompositeAnimal) o).getName();
-            } else if (o instanceof Enclosure) {
-                listItem = ((Enclosure) o).getName();
-            }
-
-            // Adds the name of the CompositeAnimal/Enclosure to the contents.
-            content.add(listItem);
-        }
-
-        // Displays the contents in the ListView.
-        enclosuresListView.getItems().setAll(content);
+        enclosuresListView.getItems().setAll(pList);
     }
 
     /**

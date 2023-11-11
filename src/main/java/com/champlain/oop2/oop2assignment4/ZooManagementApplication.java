@@ -9,8 +9,6 @@ import java.io.IOException;
 
 public class ZooManagementApplication extends Application {
 
-    public CompositeAnimal<Object> aZooData = new CompositeAnimal<>(null);
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader zooApplicationLoader = new FXMLLoader(getClass().getResource("enclosureList-view.fxml"));
