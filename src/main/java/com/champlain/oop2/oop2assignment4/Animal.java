@@ -79,8 +79,8 @@ public class Animal {
      * @param pWeight Must be between 0 and 10,000
      */
     public void setWeight(Double pWeight) {
-		if(pWeight < 0) {
-            throw new IllegalArgumentException("The weight can't be smaller than 0");
+		if(pWeight <= 0) {
+            throw new IllegalArgumentException("The weight must be greater than 0");
         } if(pWeight > 10000) {
             throw new IllegalArgumentException("The weight can't be greater than 10000");
         } else {
