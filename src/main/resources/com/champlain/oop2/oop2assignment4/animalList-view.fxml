@@ -42,7 +42,7 @@
 <VBox prefHeight="373.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.champlain.oop2.oop2assignment4.AnimalListController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="346.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
+    <AnchorPane prefHeight="346.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
       <children>
             <ListView id="animalListView" layoutX="14.0" layoutY="41.0" prefHeight="319.0" prefWidth="200.0" />
             <Label id="enclosureNameLabel" layoutX="14.0" layoutY="14.0" text="EnclosureName">

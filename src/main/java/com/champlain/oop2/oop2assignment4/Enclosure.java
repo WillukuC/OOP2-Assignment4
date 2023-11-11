@@ -75,4 +75,8 @@ public class Enclosure implements AnimalCollection{
         }
         return allAnimals.toString();
     }
+
+    public List<Animal> getList() {
+        return aAnimals;
+    }
 }

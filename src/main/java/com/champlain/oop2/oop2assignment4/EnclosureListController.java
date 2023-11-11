@@ -15,9 +15,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 // TODO: ListView initialization with the default enclosures (Lion, Cougar, Tiger)
 
@@ -45,48 +47,56 @@ public class EnclosureListController {
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
-        String selectedEnclosure = getSelectedEnclosure();
-
-        // Checks if an animal is selected
-        if (selectedEnclosure != null) {
-            FXMLLoader fxmlLoader;
-
-            // Uses isCompositeAnimal boolean to check if a CompositeAnimal or Enclosure is selected
-            if (isCompositeAnimal(selectedEnclosure)) {
-                fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
-
-                Parent view = fxmlLoader.load();
-                EnclosureListController newEnclosureListController = fxmlLoader.getController();
-                newEnclosureListController.setEnclosure(selectedEnclosure);
-
-                Scene nextScene = new Scene(view);
-                Stage nextStage = new Stage();
-                nextStage.setScene(nextScene);
-                nextStage.setTitle(selectedEnclosure);
-                nextStage.initModality(Modality.WINDOW_MODAL);
-                nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-                nextStage.showAndWait();
-
-            } else {
-                fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
-                Parent view = fxmlLoader.load();
-                AnimalListController newAnimalListController = fxmlLoader.getController();
-                newAnimalListController.setEnclosure(selectedEnclosure);
-
-                Scene nextScene = new Scene(view, 500, 500);
-                Stage nextStage = new Stage();
-                nextStage.setScene(nextScene);
-                nextStage.setTitle(selectedEnclosure);
-                nextStage.initModality(Modality.WINDOW_MODAL);
-                nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-                nextStage.showAndWait();
-            }
-
+        if (enclosuresListView.getSelectionModel().getSelectedIndex() < 0) {
+            Alert selectionAlert = new Alert(Alert.AlertType.WARNING, "Please select an enclosure.");
+            selectionAlert.showAndWait();
         } else {
-            Alert viewAlert = new Alert(Alert.AlertType.WARNING, "No animal selected!");
-            viewAlert.showAndWait();
+
+            String selectedItemName = enclosuresListView.getSelectionModel().getSelectedItem().toString();
+            CompositeAnimal placeholderCompositeAnimal = new CompositeAnimal(null);
+            Enclosure placeholderEnclosure = new Enclosure(null);
+
+            for (int i = 0; i < zooCollection.getList().size() - 1; i++) {
+                Object tempObject = zooCollection.getList().get(i);
+                if (tempObject instanceof CompositeAnimal && Objects.equals(((CompositeAnimal) tempObject).getName(), selectedItemName)) {
+                    placeholderCompositeAnimal = (CompositeAnimal) tempObject;
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
+                    Parent view = fxmlLoader.load();
+                    EnclosureListController newEnclosureListController = fxmlLoader.getController();
+                    newEnclosureListController.zooCollection = placeholderCompositeAnimal;
+
+                    Scene nextScene = new Scene(view);
+                    Stage nextStage = new Stage();
+                    nextStage.setScene(nextScene);
+                    nextStage.setTitle(placeholderCompositeAnimal.getName());
+                    nextStage.initModality(Modality.WINDOW_MODAL);
+                    nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+                    nextStage.showAndWait();
+
+                    break;
+                } else if (tempObject instanceof Enclosure && Objects.equals(((Enclosure) tempObject).getName(), selectedItemName)) {
+                    placeholderEnclosure = (Enclosure) tempObject;
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
+                    Parent view = fxmlLoader.load();
+                    AnimalListController newAnimalListController = fxmlLoader.getController();
+                    newAnimalListController.aEnclosure = placeholderEnclosure;
+
+                    Scene nextScene = new Scene(view);
+                    Stage nextStage = new Stage();
+                    nextStage.setScene(nextScene);
+                    nextStage.setTitle(placeholderEnclosure.getName());
+                    nextStage.initModality(Modality.WINDOW_MODAL);
+                    nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+                    nextStage.showAndWait();
+
+                    break;
+                }
+            }
         }
     }
+
     private boolean isCompositeAnimal(String enclosureName) {
         for (Object obj : zooCollection.getList()) {
             if (obj instanceof CompositeAnimal && ((CompositeAnimal) obj).getName().equals(enclosureName)) {
@@ -103,6 +113,7 @@ public class EnclosureListController {
 
     /**
      * Sets the contents of a CompositeAnimal's contents to enclosuresListView.
+     *
      * @param pList the CompositeAnimal to display
      */
     public void displayListView(List<Object> pList) {
@@ -110,7 +121,7 @@ public class EnclosureListController {
         List<String> content = new ArrayList<>();
 
         // Steps through pList
-        for (Object o : pList ) {
+        for (Object o : pList) {
             // Initializes listItem, which will be added to "content".
             String listItem = "";
 
@@ -133,6 +144,7 @@ public class EnclosureListController {
 
     /**
      * Imports lists and creates new Enclosure / CompositeAnimals of current zoo animals
+     *
      * @param pCollection represents a CompositeAnimal object
      */
     public void importAnimals(CompositeAnimal pCollection) {
@@ -180,6 +192,7 @@ public class EnclosureListController {
 
     /**
      * set aEnclosure to the name of the selected Enclosure then calls updateList()
+     *
      * @param selectedEnclosure name of currently selected Enclosure
      */
     public void setEnclosure(String selectedEnclosure) {
@@ -210,6 +223,7 @@ public class EnclosureListController {
     /**
      * Searches through list of Objects to find the corresponding CompositeAnimal. Returns if found, else null.
      * null is for redundancy in case of errors.
+     *
      * @param name Name of selected CompositeAnimal
      * @return CompositeAnimal objects
      */
