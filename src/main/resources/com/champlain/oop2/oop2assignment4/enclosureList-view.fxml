@@ -43,8 +43,8 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="402.0" VBox.vgrow="ALWAYS">
       <children>
             <Button fx:id="viewButton" layoutX="261.0" layoutY="33.0" mnemonicParsing="false" onAction="#onViewButtonClick" prefHeight="25.0" prefWidth="71.0" text="View" />
-            <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false" text="Back / Exit" />
-            <ListView fx:id="enclosuresView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0" />
+            <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back / Exit" />
+            <ListView fx:id="enclosuresListView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0" />
       </children>
     </AnchorPane>
   </children>

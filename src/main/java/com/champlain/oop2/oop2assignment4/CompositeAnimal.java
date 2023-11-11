@@ -12,7 +12,7 @@ public class CompositeAnimal implements AnimalCollection {
      * The list that CompositeAnimal contains.
      * Either CompositeAnimal or Enclosures.
      */
-    private final List<Object> aCollections;
+    private final List<Object> aCollection;
 
     /**
      * The name of the CompositeAnimal group.
@@ -23,7 +23,7 @@ public class CompositeAnimal implements AnimalCollection {
      * CompositeAnimal constructor
      */
     public CompositeAnimal(String pName) {
-        aCollections = new ArrayList<>();
+        aCollection = new ArrayList<>();
         aName = pName;
     }
 
@@ -35,7 +35,7 @@ public class CompositeAnimal implements AnimalCollection {
      */
     public void addObject(Object pObject) {
         if (pObject instanceof CompositeAnimal || pObject instanceof Enclosure) {
-            aCollections.add(pObject);
+            aCollection.add(pObject);
         } else {
             throw new IllegalArgumentException("Object not supported.");
         }
@@ -47,7 +47,7 @@ public class CompositeAnimal implements AnimalCollection {
      * @param pObject The object to remove from the list.
      */
     public void removeObject(Object pObject) {
-        aCollections.remove(pObject);
+        aCollection.remove(pObject);
     }
 
     /**
@@ -78,12 +78,21 @@ public class CompositeAnimal implements AnimalCollection {
     @Override
     public String showAllAnimals() {
         StringBuilder allAnimals = new StringBuilder();
-        for (Object currentCollection : aCollections) {
+        for (Object currentCollection : aCollection) {
             allAnimals.append(currentCollection.toString());
-            if (!(allAnimals.indexOf(String.valueOf(currentCollection)) == aCollections.size() - 1)) {
+            if (!(allAnimals.indexOf(String.valueOf(currentCollection)) == aCollection.size() - 1)) {
                 allAnimals.append(", ");
             }
         }
         return allAnimals.toString();
+    }
+
+    /**
+     * Accessor for aCollection
+     *
+     * @return the list of CompositeAnimal's contents
+     */
+    public List<Object> getList() {
+        return new ArrayList<>(aCollection);
     }
 }
