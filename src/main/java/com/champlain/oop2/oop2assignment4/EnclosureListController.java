@@ -1,7 +1,5 @@
 package com.champlain.oop2.oop2assignment4;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,19 +24,20 @@ import java.util.Objects;
  * CompositeAnimals in the zoo, or the list of Enclosures in the CompositeAnimal.
  */
 public class EnclosureListController {
+    public Button viewButton;
+    public Button backExitButton;
     /**
      * Initializes the enclosuresListView
      */
     @FXML
     private ListView<Object> enclosuresListView;
 
-    CompositeAnimal zooCollection = new CompositeAnimal("Zoo");
+    CompositeAnimal<Object> zooCollection = new CompositeAnimal<>("Zoo");
 
     private String aEnclosure;
 
     @FXML
     protected void initialize() {
-        importAnimals(zooCollection);
         displayListView(zooCollection.getList());
         enclosuresListView.getSelectionModel().select(0);
     }
@@ -53,8 +50,8 @@ public class EnclosureListController {
         } else {
 
             String selectedItemName = enclosuresListView.getSelectionModel().getSelectedItem().toString();
-            CompositeAnimal placeholderCompositeAnimal = new CompositeAnimal(null);
-            Enclosure placeholderEnclosure = new Enclosure(null);
+            CompositeAnimal<Object> placeholderCompositeAnimal;
+            Enclosure<Animal> placeholderEnclosure;
 
             for (int i = 0; i < zooCollection.getList().size() - 1; i++) {
                 Object tempObject = zooCollection.getList().get(i);
@@ -65,7 +62,6 @@ public class EnclosureListController {
                     Parent view = fxmlLoader.load();
                     EnclosureListController newEnclosureListController = fxmlLoader.getController();
                     newEnclosureListController.zooCollection = placeholderCompositeAnimal;
-
                     Scene nextScene = new Scene(view);
                     Stage nextStage = new Stage();
                     nextStage.setScene(nextScene);
@@ -82,7 +78,6 @@ public class EnclosureListController {
                     Parent view = fxmlLoader.load();
                     AnimalListController newAnimalListController = fxmlLoader.getController();
                     newAnimalListController.aEnclosure = placeholderEnclosure;
-
                     Scene nextScene = new Scene(view);
                     Stage nextStage = new Stage();
                     nextStage.setScene(nextScene);
@@ -166,8 +161,8 @@ public class EnclosureListController {
         tigerCubs.addAnimal(new Tiger("Indra"));
 
         CompositeAnimal tigers = new CompositeAnimal("Tigers");
-        tigers.addObject(tigerHabitat);
-        tigers.addObject(tigerCubs);
+        tigers.addEnclosure(tigerHabitat);
+        tigers.addEnclosure(tigerCubs);
 
         // Cougars
         Enclosure cougarMedical = new Enclosure("Cougar Medical Care");
@@ -179,14 +174,14 @@ public class EnclosureListController {
         cougarHabitat.addAnimal(new Cougar("Lenny"));
 
         CompositeAnimal cougars = new CompositeAnimal("Cougars");
-        cougars.addObject(cougarHabitat);
-        cougars.addObject(cougarMedical);
+        cougars.addEnclosure(cougarHabitat);
+        cougars.addEnclosure(cougarMedical);
 
         // Zoo
         pCollection.setName("Big Cats");
-        pCollection.addObject(lions);
-        pCollection.addObject(tigers);
-        pCollection.addObject(cougars);
+        pCollection.addEnclosure(lions);
+        pCollection.addCompositeAnimal(tigers);
+        pCollection.addCompositeAnimal(cougars);
     }
 
 

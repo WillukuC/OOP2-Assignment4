@@ -7,12 +7,12 @@ import java.util.List;
  * CompositeAnimal can be comprised of both CompositeAnimals and Enclosures
  * This is basically a list of lists.
  */
-public class CompositeAnimal implements AnimalCollection {
+public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection {
     /**
      * The list that CompositeAnimal contains.
      * Either CompositeAnimal or Enclosures.
      */
-    private final List<Object> aCollection;
+    private final ArrayList<Object> aCollection;
 
     /**
      * The name of the CompositeAnimal group.
@@ -28,27 +28,41 @@ public class CompositeAnimal implements AnimalCollection {
     }
 
     /**
-     * Allows adding CompositeAnimal or Enclosure to aCollections.
+     * Allows adding an Enclosure to aCollections.
      *
-     * @param pObject The object to add to the list. Must be either CompositeAnimal or Enclosure.
-     * @throws IllegalArgumentException if pObject is neither CompositeAnimal or Enclosure
+     * @param pEnclosure The object to add to the list. Must be Enclosure.
      */
-    public void addObject(Object pObject) {
-        if (pObject instanceof CompositeAnimal || pObject instanceof Enclosure) {
-            aCollection.add(pObject);
-        } else {
-            throw new IllegalArgumentException("Object not supported.");
-        }
+    public void addEnclosure(Enclosure<Animal> pEnclosure) {
+        aCollection.add(pEnclosure);
     }
 
     /**
-     * Allows removing an object from aCollections.
+     * Allows removing an Enclosure from aCollections.
      *
-     * @param pObject The object to remove from the list.
+     * @param pEnclosure The object to remove from the list. Must be Enclosure.
      */
-    public void removeObject(Object pObject) {
-        aCollection.remove(pObject);
+    public void removeEnclosure(Enclosure<Animal> pEnclosure) {
+        aCollection.remove(pEnclosure);
     }
+
+    /**
+     * Allows adding a CompositeAnimal to aCollections.
+     *
+     * @param pCompositeAnimal The object to add to the list. Must be CompositeAnimal.
+     */
+    public void addCompositeAnimal(CompositeAnimal<Object> pCompositeAnimal) {
+        aCollection.add(pCompositeAnimal);
+    }
+
+    /**
+     * Allows removing a CompositeAnimal from aCollections.
+     *
+     * @param pCompositeAnimal The object to remove from the list. Must be CompositeAnimal.
+     */
+    public void removeCompositeAnimal(CompositeAnimal<Object> pCompositeAnimal) {
+        aCollection.remove(pCompositeAnimal);
+    }
+
 
     /**
      * Sets the name of the CompositeAnimal

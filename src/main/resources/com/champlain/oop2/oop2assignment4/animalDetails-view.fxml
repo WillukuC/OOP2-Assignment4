@@ -41,43 +41,41 @@
 
 <VBox prefHeight="358.0" prefWidth="367.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.champlain.oop2.oop2assignment4.AnimalDetailsController">
-  <children>
-    <AnchorPane id="ageTextField" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="567.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Label id="titleLabel" layoutX="31.0" layoutY="32.0" text="Animal Details">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label id="nameLabel" layoutX="48.0" layoutY="105.0" text="Name: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label id="weightLabel" layoutX="48.0" layoutY="167.0" text="Weight: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label id="ageLabel" layoutX="48.0" layoutY="230.0" text="Age: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField id="nameTextField" fx:id="aNameTextField" layoutX="121.0" layoutY="103.0" />
-            <TextField id="weightTextField" fx:id="aWeightTextField" layoutX="121.0" layoutY="164.0" />
-            <TextField id="ageTextField" fx:id="aAgeTextField" layoutX="121.0" layoutY="228.0" />
-            <Button id="saveButton" fx:id="aSaveButton" layoutX="87.0" layoutY="289.0" mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button id="backButton" fx:id="aBackButton" layoutX="231.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-      </children>
+    <AnchorPane id="ageTextField" prefHeight="400.0" prefWidth="567.0" VBox.vgrow="ALWAYS">
+        <Label id="titleLabel" layoutX="31.0" layoutY="32.0" text="Animal Details">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+        <Label id="nameLabel" layoutX="48.0" layoutY="105.0" text="Name: ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label id="weightLabel" layoutX="48.0" layoutY="167.0" text="Weight: ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label id="ageLabel" layoutX="48.0" layoutY="230.0" text="Age: ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextField id="nameTextField" fx:id="aNameTextField" layoutX="121.0" layoutY="103.0"/>
+        <TextField id="weightTextField" fx:id="aWeightTextField" layoutX="121.0" layoutY="164.0"/>
+        <TextField id="ageTextField" fx:id="aAgeTextField" layoutX="121.0" layoutY="228.0"/>
+        <Button id="saveButton" fx:id="aSaveButton" layoutX="87.0" layoutY="289.0" mnemonicParsing="false"
+                onAction="#onSaveButtonClick" text="Save">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button id="backButton" fx:id="aBackButton" layoutX="231.0" layoutY="289.0" mnemonicParsing="false"
+                onAction="#onBackButtonClick" text="Back">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
     </AnchorPane>
-  </children>
 </VBox>

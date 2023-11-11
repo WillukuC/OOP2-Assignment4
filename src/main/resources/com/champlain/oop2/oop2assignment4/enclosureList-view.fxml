@@ -39,13 +39,11 @@
 
 <VBox prefHeight="367.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.champlain.oop2.oop2assignment4.EnclosureListController">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="402.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Button fx:id="viewButton" layoutX="261.0" layoutY="33.0" mnemonicParsing="false" onAction="#onViewButtonClick" prefHeight="25.0" prefWidth="71.0" text="View" />
-            <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back / Exit" />
-            <ListView fx:id="enclosuresListView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0" />
-      </children>
+    <AnchorPane prefHeight="400.0" prefWidth="402.0" VBox.vgrow="ALWAYS">
+        <Button fx:id="viewButton" layoutX="261.0" layoutY="33.0" mnemonicParsing="false"
+                onAction="#onViewButtonClick" prefHeight="25.0" prefWidth="71.0" text="View"/>
+        <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false"
+                onAction="#onBackButtonClick" text="Back / Exit"/>
+        <ListView fx:id="enclosuresListView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0"/>
     </AnchorPane>
-  </children>
 </VBox>

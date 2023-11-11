@@ -41,20 +41,20 @@
 
 <VBox prefHeight="373.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.champlain.oop2.oop2assignment4.AnimalListController">
-  <children>
     <AnchorPane prefHeight="346.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
-      <children>
-            <ListView id="animalListView" layoutX="14.0" layoutY="41.0" prefHeight="319.0" prefWidth="200.0" />
-            <Label id="enclosureNameLabel" layoutX="14.0" layoutY="14.0" text="EnclosureName">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button id="viewEditButton" layoutX="228.0" layoutY="41.0" mnemonicParsing="false" text="View/Edit" onAction="#onViewEditButtonClick" />
-            <Button id="addButton" layoutX="228.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Add" onAction="#onAddButtonClick" />
-            <Button id="removeButton" layoutX="228.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Remove" onAction="#onRemoveButtonClick" />
-            <Button id="backButton" layoutX="228.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Back" onAction="#onBackButtonClick" />
-      </children>
+        <ListView id="animalListView" layoutX="14.0" layoutY="41.0" prefHeight="319.0" prefWidth="200.0"/>
+        <Label id="enclosureNameLabel" layoutX="14.0" layoutY="14.0" text="EnclosureName">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button id="viewEditButton" layoutX="228.0" layoutY="41.0" mnemonicParsing="false" text="View/Edit"
+                onAction="#onViewEditButtonClick"/>
+        <Button id="addButton" layoutX="228.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="67.0" text="Add" onAction="#onAddButtonClick"/>
+        <Button id="removeButton" layoutX="228.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="67.0" text="Remove" onAction="#onRemoveButtonClick"/>
+        <Button id="backButton" layoutX="228.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="67.0" text="Back" onAction="#onBackButtonClick"/>
     </AnchorPane>
-  </children>
 </VBox>

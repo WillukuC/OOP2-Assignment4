@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The Enclosure class only contains a list of Animals. Has methods to add and remove animals.
  */
-public class Enclosure implements AnimalCollection{
+public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollection{
     /**
      * List of the Animals in the Enclosure
      */

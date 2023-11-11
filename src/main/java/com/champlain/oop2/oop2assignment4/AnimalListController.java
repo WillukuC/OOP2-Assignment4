@@ -1,20 +1,18 @@
 package com.champlain.oop2.oop2assignment4;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.util.List;
 
 public class AnimalListController {
     @FXML
-    private ListView<Animal> animalListView;
+    private final ListView<Animal> animalListView = new ListView<>();
 
     Enclosure aEnclosure = new Enclosure(null);
-
-    public AnimalListController(ListView<Animal> animalListView) {
-        this.animalListView = animalListView;
-    }
 
     @FXML
     protected void initialize() {
@@ -49,7 +47,7 @@ public class AnimalListController {
      * @param selectedEnclosure name of currently selected Enclosure
      */
     public void setEnclosure(Enclosure selectedEnclosure) {
-        this.aEnclosure = selectedEnclosure;
+        aEnclosure = selectedEnclosure;
         updateList();
     }
 
@@ -74,7 +72,7 @@ public class AnimalListController {
     }
 
     private void displayListView(List<Animal> list) {
-
+        animalListView.getItems().setAll(list);
     }
 
     private Enclosure setSelectedEnclosure(String aEnclosure) {
