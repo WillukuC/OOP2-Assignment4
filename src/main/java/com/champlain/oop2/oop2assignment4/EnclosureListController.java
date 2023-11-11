@@ -27,16 +27,6 @@ import java.util.List;
  */
 public class EnclosureListController {
     /**
-     * Initializes the backExitButton
-     */
-    @FXML
-    private Button backExitButton;
-    /**
-     * Initializes the viewButton
-     */
-    @FXML
-    private Button viewButton;
-    /**
      * Initializes the enclosuresListView
      */
     @FXML
@@ -45,13 +35,12 @@ public class EnclosureListController {
     CompositeAnimal zooCollection = new CompositeAnimal("Zoo");
 
     private String aEnclosure;
-    private String pEnclosure;
-    public String getEnclosure() { return aEnclosure; }
 
     @FXML
     protected void initialize() {
         importAnimals(zooCollection);
         displayListView(zooCollection.getList());
+        enclosuresListView.getSelectionModel().select(0);
     }
 
     @FXML
@@ -70,18 +59,16 @@ public class EnclosureListController {
                 EnclosureListController newEnclosureListController = fxmlLoader.getController();
                 newEnclosureListController.setEnclosure(selectedEnclosure);
 
-                Scene nextScene = new Scene(view, 500, 500);
+                Scene nextScene = new Scene(view);
                 Stage nextStage = new Stage();
                 nextStage.setScene(nextScene);
-                nextStage.setTitle("Enclosures");
+                nextStage.setTitle(selectedEnclosure);
                 nextStage.initModality(Modality.WINDOW_MODAL);
                 nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
                 nextStage.showAndWait();
 
             } else {
-                Alert viewAlert = new Alert(Alert.AlertType.WARNING, "Pretend this is an animal list");
-                viewAlert.showAndWait();
-                /* fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
+                fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
                 Parent view = fxmlLoader.load();
                 AnimalListController newAnimalListController = fxmlLoader.getController();
                 newAnimalListController.setEnclosure(selectedEnclosure);
@@ -89,10 +76,10 @@ public class EnclosureListController {
                 Scene nextScene = new Scene(view, 500, 500);
                 Stage nextStage = new Stage();
                 nextStage.setScene(nextScene);
-                nextStage.setTitle("Animals");
+                nextStage.setTitle(selectedEnclosure);
                 nextStage.initModality(Modality.WINDOW_MODAL);
                 nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-                nextStage.showAndWait(); */
+                nextStage.showAndWait();
             }
 
         } else {
@@ -150,10 +137,10 @@ public class EnclosureListController {
      */
     public void importAnimals(CompositeAnimal pCollection) {
         // Lions
-        Enclosure Lion = new Enclosure("Lion");
-        Lion.addAnimal(new Lion("Simba"));
-        Lion.addAnimal(new Lion("Mufasa"));
-        Lion.addAnimal(new Lion("Nala"));
+        Enclosure lions = new Enclosure("Lions");
+        lions.addAnimal(new Lion("Simba"));
+        lions.addAnimal(new Lion("Mufasa"));
+        lions.addAnimal(new Lion("Nala"));
 
         // Tigers
         Enclosure tigerHabitat = new Enclosure("Tiger Habitat");
@@ -185,7 +172,7 @@ public class EnclosureListController {
 
         // Zoo
         pCollection.setName("Big Cats");
-        pCollection.addObject(Lion);
+        pCollection.addObject(lions);
         pCollection.addObject(tigers);
         pCollection.addObject(cougars);
     }
