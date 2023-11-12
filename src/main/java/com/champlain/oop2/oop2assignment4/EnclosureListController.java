@@ -46,13 +46,11 @@ public class EnclosureListController {
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
         int listIndex = enclosuresListView.getSelectionModel().getSelectedIndex();
 
-        if (zooCollection.getObjectList().get(listIndex) instanceof Enclosure) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
+        if (zooCollection.getObjectList().get(listIndex) instanceof CompositeAnimal) {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
             Parent view = fxmlLoader.load();
-            AnimalListController newAnimalViewController = fxmlLoader.getController();
-
-            newAnimalViewController.setAnimals(getSelectedAnimals());
-
+            EnclosureListController newEnclosureViewController = fxmlLoader.getController();
+            newEnclosureViewController.setEnclosure(getSelectedEnclosure());
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
@@ -61,10 +59,12 @@ public class EnclosureListController {
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.showAndWait();
         } else {
-            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
             Parent view = fxmlLoader.load();
-            EnclosureListController newEnclosureViewController = fxmlLoader.getController();
-            newEnclosureViewController.setEnclosure(getSelectedEnclosure());
+            AnimalListController newAnimalViewController = fxmlLoader.getController();
+            newAnimalViewController.setAnimals(getSelectedAnimals());
+            newAnimalViewController.displayListView(getSelectedAnimals());
+
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
@@ -131,11 +131,18 @@ public class EnclosureListController {
     }
 
     public Enclosure<Animal> getSelectedAnimals() {
-        Enclosure<Animal> selectedEnclosure = new Enclosure<>("");
-        enclosuresListView.getSelectionModel().getSelectedItem();
-        selectedEnclosure = (Enclosure<Animal>) enclosuresListView.getSelectionModel().getSelectedItem();
+        return (Enclosure<Animal>) zooCollection.getObjectList().get(enclosuresListView.getSelectionModel().getSelectedIndex());
+    }
 
-        return selectedEnclosure;
+    public boolean isEnclosure(List<Object> pList) {
+        for (Object o : pList) {
+            if (o instanceof CompositeAnimal) {
+                isEnclosure(((CompositeAnimal) o).getList());
+            } else if (o instanceof Enclosure<?>) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

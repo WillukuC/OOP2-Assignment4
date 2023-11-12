@@ -1,5 +1,7 @@
 package com.champlain.oop2.oop2assignment4;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
@@ -11,7 +13,7 @@ public class AnimalListController {
     @FXML
     private final ListView<Object> animalListView = new ListView<>();
 
-    private Enclosure<Animal> aAnimals;
+    private Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
 
     @FXML
     protected void initialize() {
@@ -42,7 +44,7 @@ public class AnimalListController {
     }
 
     public void displayListView(Enclosure<Animal> pAnimals) {
-        List<String> enclosureNames = new ArrayList<>();
+        ObservableList<String> enclosureNames = FXCollections.observableArrayList();
 
         for (Animal a : pAnimals) {
             enclosureNames.add(a.getName());
