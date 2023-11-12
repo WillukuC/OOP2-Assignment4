@@ -46,7 +46,17 @@ public class EnclosureListController {
         int listIndex = enclosuresListView.getSelectionModel().getSelectedIndex();
 
         if (zooCollection.getList().get(listIndex) instanceof Enclosure) {
-            System.out.println("This is an enclosure. The code is not yet implemented.");
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
+            Parent view = fxmlLoader.load();
+            AnimalListController newAnimalViewController = fxmlLoader.getController();
+            newAnimalViewController.setEnclosure(getSelectedEnclosure());
+            Scene nextScene = new Scene(view);
+            Stage nextStage = new Stage();
+            nextStage.setScene(nextScene);
+            nextStage.setTitle("Enclosure");
+            nextStage.initModality(Modality.WINDOW_MODAL);
+            nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+            nextStage.showAndWait();
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
             Parent view = fxmlLoader.load();
