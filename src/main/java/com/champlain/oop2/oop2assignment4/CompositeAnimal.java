@@ -7,7 +7,7 @@ import java.util.List;
  * CompositeAnimal can be comprised of both CompositeAnimals and Enclosures
  * This is basically a list of lists.
  */
-public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection {
+public class CompositeAnimal implements AnimalCollection {
     /**
      * The list that CompositeAnimal contains.
      * Either CompositeAnimal or Enclosures.
@@ -32,7 +32,7 @@ public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection
      *
      * @param pEnclosure The object to add to the list. Must be Enclosure.
      */
-    public void addEnclosure(Enclosure<Animal> pEnclosure) {
+    public void addEnclosure(Enclosure pEnclosure) {
         aCollection.add(pEnclosure);
     }
 
@@ -41,7 +41,7 @@ public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection
      *
      * @param pEnclosure The object to remove from the list. Must be Enclosure.
      */
-    public void removeEnclosure(Enclosure<Animal> pEnclosure) {
+    public void removeEnclosure(Enclosure pEnclosure) {
         aCollection.remove(pEnclosure);
     }
 
@@ -50,7 +50,7 @@ public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection
      *
      * @param pCompositeAnimal The object to add to the list. Must be CompositeAnimal.
      */
-    public void addCompositeAnimal(CompositeAnimal<Object> pCompositeAnimal) {
+    public void addCompositeAnimal(CompositeAnimal pCompositeAnimal) {
         aCollection.add(pCompositeAnimal);
     }
 
@@ -59,7 +59,7 @@ public class CompositeAnimal<T> extends ArrayList<T> implements AnimalCollection
      *
      * @param pCompositeAnimal The object to remove from the list. Must be CompositeAnimal.
      */
-    public void removeCompositeAnimal(CompositeAnimal<Object> pCompositeAnimal) {
+    public void removeCompositeAnimal(CompositeAnimal pCompositeAnimal) {
         aCollection.remove(pCompositeAnimal);
     }
 

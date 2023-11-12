@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * The Enclosure class only contains a list of Animals. Has methods to add and remove animals.
  */
-public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollection{
+public class Enclosure implements AnimalCollection{
     /**
      * List of the Animals in the Enclosure
      */
-    private final List<Animal> aAnimals;
+    private final List aAnimals;
 
     /**
      * Name of the Enclosure
@@ -67,7 +67,7 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
     @Override
     public String showAllAnimals() {
         StringBuilder allAnimals = new StringBuilder();
-        for (Animal currentAnimal : aAnimals){
+        for (Object currentAnimal : aAnimals){
             allAnimals.append(currentAnimal.toString());
             if (!(allAnimals.indexOf(String.valueOf(currentAnimal)) == aAnimals.size() - 1)) {
                 allAnimals.append(", ");
