@@ -1,18 +1,40 @@
 package com.champlain.oop2.oop2assignment4;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AnimalListController {
     @FXML
     private final ListView<Animal> animalListView = new ListView<>();
 
-    Enclosure currentEnclosure = new Enclosure("Enclosure");
+    Enclosure currentEnclosure = new Enclosure(getSelectedEnclosure().toString());
 
     private String aEnclosure;
+    private void openAnimalEditor(ActionEvent pEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalDetails-view.fxml"));
+        Parent view = fxmlLoader.load();
+        AnimalDetailsController newAnimalDetailsController = fxmlLoader.getController();
+        //newAnimalDetailsController.setEnclosure(getSelectedEnclosure());
+        Scene nextScene = new Scene(view);
+        Stage nextStage = new Stage();
+        nextStage.setScene(nextScene);
+        nextStage.setTitle(getSelectedEnclosure().toString());
+        nextStage.initModality(Modality.WINDOW_MODAL);
+        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+        nextStage.showAndWait();
+    }
+        
 
     @FXML
     protected void initialize() {
@@ -21,15 +43,13 @@ public class AnimalListController {
     }
 
     @FXML
-    protected void onViewEditButtonClick() {
-        Alert viewAlert = new Alert(Alert.AlertType.WARNING, "View");
-        viewAlert.showAndWait();
+    protected void onViewEditButtonClick(ActionEvent event) throws IOException {
+        openAnimalEditor(event);
     }
 
     @FXML
-    protected void onAddButtonClick() {
-        Alert addAlert = new Alert(Alert.AlertType.WARNING, "Add");
-        addAlert.showAndWait();
+    protected void onAddButtonClick(ActionEvent event) throws IOException {
+        openAnimalEditor(event);
     }
 
     @FXML
@@ -39,7 +59,9 @@ public class AnimalListController {
     }
 
     @FXML
-    protected void onBackButtonClick() {
+    protected void onBackButtonClick(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
     /**
