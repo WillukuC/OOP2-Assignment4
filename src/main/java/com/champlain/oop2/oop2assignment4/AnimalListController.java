@@ -4,19 +4,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalListController {
     @FXML
-    private final ListView<Animal> animalListView = new ListView<>();
+    private final ListView<Object> animalListView = new ListView<>();
 
-    Enclosure currentEnclosure = new Enclosure("Enclosure");
-
-    private String aEnclosure;
+    private Enclosure<Animal> aAnimals;
 
     @FXML
     protected void initialize() {
-        displayListView(currentEnclosure.getList());
+        displayListView(aAnimals);
         animalListView.getSelectionModel().select(0);
     }
 
@@ -42,40 +41,18 @@ public class AnimalListController {
     protected void onBackButtonClick() {
     }
 
-    /**
-     * set aEnclosure to the name of the selected Enclosure then calls updateList()
-     * @param selectedEnclosure name of currently selected Enclosure
-     */
-    public void setEnclosure(String selectedEnclosure) {
-        this.aEnclosure = selectedEnclosure;
-        updateList();
-    }
+    public void displayListView(Enclosure<Animal> pAnimals) {
+        List<String> enclosureNames = new ArrayList<>();
 
-    /**
-     * @return name of currently selected item
-     */
-    public String getSelectedEnclosure() {
-        return String.valueOf(animalListView.getSelectionModel().getSelectedItem());
-    }
-
-    /**
-     * Updates displayListView with the selected CompositeAnimal for the new Window
-     */
-    private void updateList() {
-        // Find the selected CompositeAnimal
-        Enclosure selectedEnclosure = setSelectedEnclosure(aEnclosure);
-
-        // Display the contents of the selected CompositeAnimal
-        if (selectedEnclosure != null) {
-            displayListView(selectedEnclosure.getList());
+        for (Animal a : pAnimals) {
+            enclosureNames.add(a.getName());
         }
+
+        animalListView.getItems().setAll(enclosureNames);
     }
 
-    private void displayListView(List<Animal> list) {
-        animalListView.getItems().setAll(list);
-    }
 
-    private Enclosure setSelectedEnclosure(String aEnclosure) {
-        return null;
+    public void setAnimals(Enclosure<Animal> pAnimals) {
+        this.aAnimals = pAnimals;
     }
 }

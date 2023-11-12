@@ -13,34 +13,34 @@ public class ZooSingleton implements AnimalCollection {
         // Lions
         aZoo = new CompositeAnimal("Zoo");
 
-        Enclosure lions = new Enclosure("Lions");
-        lions.addAnimal(new Lion("Simba"));
-        lions.addAnimal(new Lion("Mufasa"));
-        lions.addAnimal(new Lion("Nala"));
+        Enclosure<Animal> lions = new Enclosure<>("Lions");
+        lions.add(new Lion("Simba"));
+        lions.add(new Lion("Mufasa"));
+        lions.add(new Lion("Nala"));
 
         // Tigers
-        Enclosure tigerHabitat = new Enclosure("Tiger Habitat");
-        tigerHabitat.addAnimal(new Tiger("Rajah"));
-        tigerHabitat.addAnimal(new Tiger("Shere Khan"));
+        Enclosure<Animal> tigerHabitat = new Enclosure<>("Tiger Habitat");
+        tigerHabitat.add(new Tiger("Rajah"));
+        tigerHabitat.add(new Tiger("Shere Khan"));
 
-        Enclosure tigerCubs = new Enclosure("Tiger Cubs");
-        tigerCubs.addAnimal(new Tiger("Tala (Mother)"));
-        tigerCubs.addAnimal(new Tiger("Ravi"));
-        tigerCubs.addAnimal(new Tiger("Kali"));
-        tigerCubs.addAnimal(new Tiger("Indra"));
+        Enclosure<Animal> tigerCubs = new Enclosure<>("Tiger Cubs");
+        tigerCubs.add(new Tiger("Tala (Mother)"));
+        tigerCubs.add(new Tiger("Ravi"));
+        tigerCubs.add(new Tiger("Kali"));
+        tigerCubs.add(new Tiger("Indra"));
 
         CompositeAnimal tigers = new CompositeAnimal("Tigers");
         tigers.addEnclosure(tigerHabitat);
         tigers.addEnclosure(tigerCubs);
 
         // Cougars
-        Enclosure cougarMedical = new Enclosure("Cougar Medical Care");
-        cougarMedical.addAnimal(new Cougar("Sierra"));
+        Enclosure<Animal> cougarMedical = new Enclosure<>("Cougar Medical Care");
+        cougarMedical.add(new Cougar("Sierra"));
 
-        Enclosure cougarHabitat = new Enclosure("Cougar Habitat");
-        cougarHabitat.addAnimal(new Cougar("Rocky"));
-        cougarHabitat.addAnimal(new Cougar("Luna"));
-        cougarHabitat.addAnimal(new Cougar("Lenny"));
+        Enclosure<Animal> cougarHabitat = new Enclosure<>("Cougar Habitat");
+        cougarHabitat.add(new Cougar("Rocky"));
+        cougarHabitat.add(new Cougar("Luna"));
+        cougarHabitat.add(new Cougar("Lenny"));
 
         CompositeAnimal cougars = new CompositeAnimal("Cougars");
         cougars.addEnclosure(cougarHabitat);

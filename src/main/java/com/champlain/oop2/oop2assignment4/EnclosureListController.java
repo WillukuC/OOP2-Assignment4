@@ -34,6 +34,8 @@ public class EnclosureListController {
 
     private String aEnclosure;
 
+    private Enclosure<Animal> aAnimals;
+
     @FXML
     protected void initialize() {
         displayListView(zooCollection.getObjectList());
@@ -48,7 +50,9 @@ public class EnclosureListController {
             FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
             Parent view = fxmlLoader.load();
             AnimalListController newAnimalViewController = fxmlLoader.getController();
-            newAnimalViewController.setEnclosure(getSelectedEnclosure());
+
+            newAnimalViewController.setAnimals(getSelectedAnimals());
+
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
@@ -101,7 +105,7 @@ public class EnclosureListController {
             if (o instanceof CompositeAnimal) {
                 name = ((CompositeAnimal) o).getName();
             } else {
-                name = ((Enclosure) o).getName();
+                name = ((Enclosure<Animal>) o).getName();
             }
             enclosureNames.add(name);
         }
@@ -124,6 +128,14 @@ public class EnclosureListController {
      */
     public String getSelectedEnclosure() {
         return String.valueOf(enclosuresListView.getSelectionModel().getSelectedItem());
+    }
+
+    public Enclosure<Animal> getSelectedAnimals() {
+        Enclosure<Animal> selectedEnclosure = new Enclosure<>("");
+        enclosuresListView.getSelectionModel().getSelectedItem();
+        selectedEnclosure = (Enclosure<Animal>) enclosuresListView.getSelectionModel().getSelectedItem();
+
+        return selectedEnclosure;
     }
 
     /**
