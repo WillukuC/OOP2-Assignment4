@@ -1,13 +1,17 @@
 package com.champlain.oop2.oop2assignment4;
 
-public class ZooSingleton {
+import java.util.List;
+
+public class ZooSingleton implements AnimalCollection {
     private static ZooSingleton single_instance = null;
 
-    public CompositeAnimal zoo;
+    private String aName;
+
+    private CompositeAnimal aZoo = null;
 
     private ZooSingleton() {
         // Lions
-        zoo = new CompositeAnimal("Zoo");
+        aZoo = new CompositeAnimal("Zoo");
 
         Enclosure lions = new Enclosure("Lions");
         lions.addAnimal(new Lion("Simba"));
@@ -43,9 +47,9 @@ public class ZooSingleton {
         cougars.addEnclosure(cougarMedical);
 
         // Zoo
-        zoo.addEnclosure(lions);
-        zoo.addCompositeAnimal(tigers);
-        zoo.addCompositeAnimal(cougars);
+        aZoo.addEnclosure(lions);
+        aZoo.addCompositeAnimal(tigers);
+        aZoo.addCompositeAnimal(cougars);
     }
 
     public static synchronized ZooSingleton getInstance() {
@@ -53,5 +57,25 @@ public class ZooSingleton {
             single_instance = new ZooSingleton();
         }
         return single_instance;
+    }
+
+
+    @Override
+    public void setName(String pName) {
+        aName = pName;
+    }
+
+    @Override
+    public String getName() {
+        return aName;
+    }
+
+    @Override
+    public String showAllAnimals() {
+        return null;
+    }
+
+    public List<Object> getObjectList() {
+        return aZoo.getList();
     }
 }

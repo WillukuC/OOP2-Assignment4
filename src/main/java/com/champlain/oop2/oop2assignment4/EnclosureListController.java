@@ -30,14 +30,13 @@ public class EnclosureListController {
     @FXML
     private ListView<Object> enclosuresListView;
 
-    CompositeAnimal zooCollection = new CompositeAnimal("Zoo");
+    ZooSingleton zooCollection = ZooSingleton.getInstance();
 
     private String aEnclosure;
 
     @FXML
     protected void initialize() {
-        importAnimals(zooCollection);
-        displayListView(zooCollection.getList());
+        displayListView(zooCollection.getObjectList());
         enclosuresListView.getSelectionModel().select(0);
     }
 
@@ -45,7 +44,7 @@ public class EnclosureListController {
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
         int listIndex = enclosuresListView.getSelectionModel().getSelectedIndex();
 
-        if (zooCollection.getList().get(listIndex) instanceof Enclosure) {
+        if (zooCollection.getObjectList().get(listIndex) instanceof Enclosure) {
             FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
             Parent view = fxmlLoader.load();
             AnimalListController newAnimalViewController = fxmlLoader.getController();
@@ -74,7 +73,7 @@ public class EnclosureListController {
 
 
     private boolean isCompositeAnimal(String enclosureName) {
-        for (Object obj : zooCollection.getList()) {
+        for (Object obj : zooCollection.getObjectList()) {
             if (obj instanceof CompositeAnimal && ((CompositeAnimal) obj).getName().equals(enclosureName)) {
                 return true;
             }
@@ -109,54 +108,6 @@ public class EnclosureListController {
 
         enclosuresListView.getItems().setAll(enclosureNames);
     }
-
-    /**
-     * Imports lists and creates new Enclosure / CompositeAnimals of current zoo animals
-     *
-     * @param pCollection represents a CompositeAnimal object
-     */
-    public void importAnimals(CompositeAnimal pCollection) {
-        // Lions
-        Enclosure lions = new Enclosure("Lions");
-        lions.addAnimal(new Lion("Simba"));
-        lions.addAnimal(new Lion("Mufasa"));
-        lions.addAnimal(new Lion("Nala"));
-
-        // Tigers
-        Enclosure tigerHabitat = new Enclosure("Tiger Habitat");
-        tigerHabitat.addAnimal(new Tiger("Rajah"));
-        tigerHabitat.addAnimal(new Tiger("Shere Khan"));
-
-        Enclosure tigerCubs = new Enclosure("Tiger Cubs");
-        tigerCubs.addAnimal(new Tiger("Tala (Mother)"));
-        tigerCubs.addAnimal(new Tiger("Ravi"));
-        tigerCubs.addAnimal(new Tiger("Kali"));
-        tigerCubs.addAnimal(new Tiger("Indra"));
-
-        CompositeAnimal tigers = new CompositeAnimal("Tigers");
-        tigers.addEnclosure(tigerHabitat);
-        tigers.addEnclosure(tigerCubs);
-
-        // Cougars
-        Enclosure cougarMedical = new Enclosure("Cougar Medical Care");
-        cougarMedical.addAnimal(new Cougar("Sierra"));
-
-        Enclosure cougarHabitat = new Enclosure("Cougar Habitat");
-        cougarHabitat.addAnimal(new Cougar("Rocky"));
-        cougarHabitat.addAnimal(new Cougar("Luna"));
-        cougarHabitat.addAnimal(new Cougar("Lenny"));
-
-        CompositeAnimal cougars = new CompositeAnimal("Cougars");
-        cougars.addEnclosure(cougarHabitat);
-        cougars.addEnclosure(cougarMedical);
-
-        // Zoo
-        pCollection.setName("Big Cats");
-        pCollection.addEnclosure(lions);
-        pCollection.addCompositeAnimal(tigers);
-        pCollection.addCompositeAnimal(cougars);
-    }
-
 
     /**
      * set aEnclosure to the name of the selected Enclosure then calls updateList()
@@ -196,7 +147,7 @@ public class EnclosureListController {
      * @return CompositeAnimal objects
      */
     private CompositeAnimal setSelectedCompositeAnimal(String name) {
-        for (Object obj : zooCollection.getList()) {
+        for (Object obj : zooCollection.getObjectList()) {
             if (obj instanceof CompositeAnimal && ((CompositeAnimal) obj).getName().equals(name)) {
                 return (CompositeAnimal) obj;
             }
