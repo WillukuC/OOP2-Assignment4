@@ -13,12 +13,7 @@ public class AnimalListController {
     @FXML
     private ListView<Object> animalListView;
 
-    public static Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
-
-    @FXML
-    private void initialize() {
-        animalListView.getItems().setAll(aAnimals);
-    }
+    public static Enclosure<Animal> aAnimals;
 
     @FXML
     protected void onViewEditButtonClick() {
@@ -52,9 +47,4 @@ public class AnimalListController {
         animalListView.getItems().setAll(enclosureNames);
         animalListView.refresh();
     }
-
-
-//    public void setAnimals(Enclosure<Animal> pAnimals) {
-//        aAnimals = pAnimals;
-//    }
 }

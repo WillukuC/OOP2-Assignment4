@@ -78,4 +78,8 @@ public class ZooSingleton implements AnimalCollection {
     public List<Object> getObjectList() {
         return aZoo.getList();
     }
+
+    public CompositeAnimal getZoo() {
+        return aZoo;
+    }
 }

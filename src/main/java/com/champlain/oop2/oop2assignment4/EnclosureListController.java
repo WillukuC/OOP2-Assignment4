@@ -34,10 +34,13 @@ public class EnclosureListController {
 
     private String aEnclosure;
 
-    public static CompositeAnimal currentEnclosure;
+    public static CompositeAnimal currentCollection;
 
     @FXML
     protected void initialize() {
+        if (currentCollection == null) {
+            initializeCurrentCollection();
+        }
         displayListView(zooCollection.getObjectList());
         enclosuresListView.getSelectionModel().select(0);
     }
@@ -51,7 +54,7 @@ public class EnclosureListController {
             Parent view = fxmlLoader.load();
             EnclosureListController newEnclosureViewController = fxmlLoader.getController();
             newEnclosureViewController.setEnclosure(getSelectedEnclosure());
-            newEnclosureViewController.setCurrentEnclosure((CompositeAnimal) zooCollection.getObjectList().get(listIndex));
+            newEnclosureViewController.setCurrentCollection((CompositeAnimal) currentCollection.getList().get(listIndex));
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
@@ -101,7 +104,6 @@ public class EnclosureListController {
 
         for (Object o : pList) {
             String name;
-            System.out.println(o.getClass());
 
             if (o instanceof CompositeAnimal) {
                 name = ((CompositeAnimal) o).getName();
@@ -132,7 +134,7 @@ public class EnclosureListController {
     }
 
     public Enclosure<Animal> getSelectedAnimals() {
-        return (Enclosure<Animal>) zooCollection.getObjectList().get(enclosuresListView.getSelectionModel().getSelectedIndex());
+        return (Enclosure<Animal>) currentCollection.getList().get(enclosuresListView.getSelectionModel().getSelectedIndex());
     }
 
     public boolean isEnclosure(List<Object> pList) {
@@ -175,8 +177,17 @@ public class EnclosureListController {
         return null;
     }
 
-    private void setCurrentEnclosure(CompositeAnimal pCurrentEnclosure) {
-        currentEnclosure = pCurrentEnclosure;
+    private void initializeCurrentCollection() {
+        currentCollection = zooCollection.getZoo();
+    }
+
+    private void setCurrentCollection(CompositeAnimal pCurrentCollection) {
+            currentCollection = pCurrentCollection;
+    }
+
+    public void onResetButtonClick(ActionEvent actionEvent) {
+        currentCollection = null;
+        initialize();
     }
 }
 
