@@ -11,14 +11,13 @@ import java.util.List;
 
 public class AnimalListController {
     @FXML
-    private final ListView<Object> animalListView = new ListView<>();
+    private ListView<Object> animalListView;
 
-    private Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
+    public static Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
 
     @FXML
-    protected void initialize() {
-        displayListView(aAnimals);
-        animalListView.getSelectionModel().select(0);
+    private void initialize() {
+        animalListView.getItems().setAll(aAnimals);
     }
 
     @FXML
@@ -43,18 +42,19 @@ public class AnimalListController {
     protected void onBackButtonClick() {
     }
 
-    public void displayListView(Enclosure<Animal> pAnimals) {
+    public void displayListView() {
         ObservableList<String> enclosureNames = FXCollections.observableArrayList();
 
-        for (Animal a : pAnimals) {
+        for (Animal a : aAnimals) {
             enclosureNames.add(a.getName());
         }
 
         animalListView.getItems().setAll(enclosureNames);
+        animalListView.refresh();
     }
 
 
-    public void setAnimals(Enclosure<Animal> pAnimals) {
-        this.aAnimals = pAnimals;
-    }
+//    public void setAnimals(Enclosure<Animal> pAnimals) {
+//        aAnimals = pAnimals;
+//    }
 }

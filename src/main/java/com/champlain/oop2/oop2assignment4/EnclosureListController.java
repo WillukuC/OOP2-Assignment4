@@ -34,7 +34,7 @@ public class EnclosureListController {
 
     private String aEnclosure;
 
-    private Enclosure<Animal> aAnimals;
+    public static CompositeAnimal currentEnclosure;
 
     @FXML
     protected void initialize() {
@@ -51,6 +51,7 @@ public class EnclosureListController {
             Parent view = fxmlLoader.load();
             EnclosureListController newEnclosureViewController = fxmlLoader.getController();
             newEnclosureViewController.setEnclosure(getSelectedEnclosure());
+            newEnclosureViewController.setCurrentEnclosure((CompositeAnimal) zooCollection.getObjectList().get(listIndex));
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
@@ -62,8 +63,8 @@ public class EnclosureListController {
             FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
             Parent view = fxmlLoader.load();
             AnimalListController newAnimalViewController = fxmlLoader.getController();
-            newAnimalViewController.setAnimals(getSelectedAnimals());
-            newAnimalViewController.displayListView(getSelectedAnimals());
+            AnimalListController.aAnimals = getSelectedAnimals();
+            newAnimalViewController.displayListView();
 
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
@@ -172,6 +173,10 @@ public class EnclosureListController {
             }
         }
         return null;
+    }
+
+    private void setCurrentEnclosure(CompositeAnimal pCurrentEnclosure) {
+        currentEnclosure = pCurrentEnclosure;
     }
 }
 

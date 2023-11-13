@@ -42,7 +42,7 @@
 <VBox prefHeight="373.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.champlain.oop2.oop2assignment4.AnimalListController">
     <AnchorPane prefHeight="346.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
-        <ListView id="animalListView" layoutX="14.0" layoutY="14.0" prefHeight="319.0" prefWidth="200.0"/>
+        <ListView fx:id="animalListView" layoutX="14.0" layoutY="14.0" prefHeight="319.0" prefWidth="200.0"/>
         <Button id="viewEditButton" layoutX="228.0" layoutY="14.0" mnemonicParsing="false" text="View/Edit"
                 onAction="#onViewEditButtonClick"/>
         <Button id="addButton" layoutX="228.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0"
