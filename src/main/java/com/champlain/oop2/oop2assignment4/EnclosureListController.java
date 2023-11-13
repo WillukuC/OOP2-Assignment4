@@ -22,8 +22,8 @@ import java.util.List;
  * CompositeAnimals in the zoo, or the list of Enclosures in the CompositeAnimal.
  */
 public class EnclosureListController {
-    public Button viewButton;
-    public Button backExitButton;
+    @FXML
+    public Button resetButton;
     /**
      * Initializes the enclosuresListView
      */
@@ -55,6 +55,7 @@ public class EnclosureListController {
             EnclosureListController newEnclosureViewController = fxmlLoader.getController();
             newEnclosureViewController.setEnclosure(getSelectedEnclosure());
             newEnclosureViewController.setCurrentCollection((CompositeAnimal) currentCollection.getList().get(listIndex));
+            newEnclosureViewController.resetButton.setVisible(false);
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
