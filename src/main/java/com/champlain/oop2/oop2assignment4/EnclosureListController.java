@@ -12,93 +12,171 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+// TODO: ListView initialization with the default enclosures (Lion, Cougar, Tiger)
+
+/**
+ * Controls the EnclosureList view, which either displays the list of
+ * CompositeAnimals in the zoo, or the list of Enclosures in the CompositeAnimal.
+ */
 public class EnclosureListController {
-//    @FXML
-//    ObservableList<String> enclosuresTop = FXCollections.observableArrayList("Lions", "Tigers", "Cougars");
+    public Button viewButton;
+    public Button backExitButton;
+    /**
+     * Initializes the enclosuresListView
+     */
     @FXML
-    ListView<String> enclosuresView = new ListView<String>();
+    private ListView<Object> enclosuresListView;
+
+    ZooSingleton zooCollection = ZooSingleton.getInstance();
+
+    private String aEnclosure;
+
+    public static CompositeAnimal currentEnclosure;
+
+    @FXML
+    protected void initialize() {
+        displayListView(zooCollection.getObjectList());
+        enclosuresListView.getSelectionModel().select(0);
+    }
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosure-view.fxml"));
-        Parent view = fxmlLoader.load();
-        EnclosureListController newEnclosureListController = fxmlLoader.getController();
-        newEnclosureListController.setEnclosure(getSelectedEnclosure());
-        Scene nextScene = new Scene(view, 500, 500);
-        Stage nextStage = new Stage();
-        nextStage.setScene(nextScene);
-        nextStage.setTitle(pEnclosure.getName());
-        nextStage.initModality(Modality.WINDOW_MODAL);
-        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-        nextStage.showAndWait();
+        int listIndex = enclosuresListView.getSelectionModel().getSelectedIndex();
+
+        if (zooCollection.getObjectList().get(listIndex) instanceof CompositeAnimal) {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("enclosureList-view.fxml"));
+            Parent view = fxmlLoader.load();
+            EnclosureListController newEnclosureViewController = fxmlLoader.getController();
+            newEnclosureViewController.setEnclosure(getSelectedEnclosure());
+            newEnclosureViewController.setCurrentEnclosure((CompositeAnimal) zooCollection.getObjectList().get(listIndex));
+            Scene nextScene = new Scene(view);
+            Stage nextStage = new Stage();
+            nextStage.setScene(nextScene);
+            nextStage.setTitle("Enclosure");
+            nextStage.initModality(Modality.WINDOW_MODAL);
+            nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+            nextStage.showAndWait();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
+            Parent view = fxmlLoader.load();
+            AnimalListController newAnimalViewController = fxmlLoader.getController();
+            AnimalListController.aAnimals = getSelectedAnimals();
+            newAnimalViewController.displayListView();
+
+            Scene nextScene = new Scene(view);
+            Stage nextStage = new Stage();
+            nextStage.setScene(nextScene);
+            nextStage.setTitle("Enclosure");
+            nextStage.initModality(Modality.WINDOW_MODAL);
+            nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+            nextStage.showAndWait();
+        }
     }
-    public void importAnimals() {
-        Enclosure Lion = new Enclosure();
-        Lion.setName("Lion");
-        Lion.addAnimal(new Lion("Simba"));
-        Lion.addAnimal(new Lion("Mufasa"));
-        Lion.addAnimal(new Lion("Nala"));
 
-        Enclosure tigerHabitat = new Enclosure();
-        tigerHabitat.setName("Tigers Habitat");
-        tigerHabitat.addAnimal(new Tiger("Rajah"));
-        tigerHabitat.addAnimal(new Tiger("Shere Khan"));
 
-        Enclosure tigerCubs = new Enclosure();
-        tigerCubs.setName("Tiger Cubs");
-        tigerCubs.addAnimal(new Tiger("Tala (Mother)"));
-        tigerCubs.addAnimal(new Tiger("Ravi"));
-        tigerCubs.addAnimal(new Tiger("Kali"));
-        tigerCubs.addAnimal(new Tiger("Indra"));
-
-        CompositeAnimal tigers = new CompositeAnimal();
-        tigers.setName("Tigers");
-        tigers.addCollection(tigerHabitat);
-        tigers.addCollection(tigerCubs);
-
-        Enclosure cougarMedical = new Enclosure();
-        cougarMedical.setName("Cougar Medical Care");
-        cougarMedical.addAnimal(new Cougar("Sierra"));
-
-        Enclosure cougarHabitat = new Enclosure();
-        cougarHabitat.setName("Cougars Habitat");
-        cougarHabitat.addAnimal(new Cougar("Rocky"));
-        cougarHabitat.addAnimal(new Cougar("Luna"));
-        cougarHabitat.addAnimal(new Cougar("Lenny"));
-
-        CompositeAnimal cougars = new CompositeAnimal();
-        cougars.setName("Cougars");
-        cougars.addCollection(cougarHabitat);
-        cougars.addCollection(cougarMedical);
-
-        CompositeAnimal myCollection = new CompositeAnimal();
-        myCollection.setName("Big Cats");
-        myCollection.addCollection(Lion);
-        myCollection.addCollection(tigers);
-        myCollection.addCollection(cougars);
+    private boolean isCompositeAnimal(String enclosureName) {
+        for (Object obj : zooCollection.getObjectList()) {
+            if (obj instanceof CompositeAnimal && ((CompositeAnimal) obj).getName().equals(enclosureName)) {
+                return true;
+            }
+        }
+        return false;
     }
-    @FXML
-    private Button backExitButton;
-    private String aEnclosure;
-    private String pEnclosure;
-    public String getEnclosure() { return aEnclosure; }
 
-    // public void setEnclosure(String aEnclosure) { this.aEnclosure = aEnclosure; }
-    public void updateList(){
-
+    public void onBackButtonClick(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
-    public void setEnclosure(String aEnclosure){
-        this.aEnclosure = pEnclosure;
-        this.updateList();
-    }
-    public void setSelectedEnclosure(String aEnclosure){
 
-    }
-    public String getSelectedEnclosure(){
-        pEnclosure = enclosuresView.getSelectionModel().getSelectedItem();
+    /**
+     * Sets the contents of a CompositeAnimal's contents to enclosuresListView.
+     *
+     * @param pList the CompositeAnimal to display
+     */
+    public void displayListView(List<Object> pList) {
+        List<String> enclosureNames = new ArrayList<>();
 
-        return pEnclosure;
+        for (Object o : pList) {
+            String name;
+            System.out.println(o.getClass());
+
+            if (o instanceof CompositeAnimal) {
+                name = ((CompositeAnimal) o).getName();
+            } else {
+                name = ((Enclosure<Animal>) o).getName();
+            }
+            enclosureNames.add(name);
+        }
+
+        enclosuresListView.getItems().setAll(enclosureNames);
+    }
+
+    /**
+     * set aEnclosure to the name of the selected Enclosure then calls updateList()
+     *
+     * @param selectedEnclosure name of currently selected Enclosure
+     */
+    public void setEnclosure(String selectedEnclosure) {
+        this.aEnclosure = selectedEnclosure;
+        updateList();
+    }
+
+    /**
+     * @return name of currently selected item
+     */
+    public String getSelectedEnclosure() {
+        return String.valueOf(enclosuresListView.getSelectionModel().getSelectedItem());
+    }
+
+    public Enclosure<Animal> getSelectedAnimals() {
+        return (Enclosure<Animal>) zooCollection.getObjectList().get(enclosuresListView.getSelectionModel().getSelectedIndex());
+    }
+
+    public boolean isEnclosure(List<Object> pList) {
+        for (Object o : pList) {
+            if (o instanceof CompositeAnimal) {
+                isEnclosure(((CompositeAnimal) o).getList());
+            } else if (o instanceof Enclosure<?>) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Updates displayListView with the selected CompositeAnimal for the new Window
+     */
+    private void updateList() {
+        // Find the selected CompositeAnimal
+        CompositeAnimal selectedCompositeAnimal = setSelectedCompositeAnimal(aEnclosure);
+
+        // Display the contents of the selected CompositeAnimal
+        if (selectedCompositeAnimal != null) {
+            displayListView(selectedCompositeAnimal.getList());
+        }
+    }
+
+    /**
+     * Searches through list of Objects to find the corresponding CompositeAnimal. Returns if found, else null.
+     * null is for redundancy in case of errors.
+     *
+     * @param name Name of selected CompositeAnimal
+     * @return CompositeAnimal objects
+     */
+    private CompositeAnimal setSelectedCompositeAnimal(String name) {
+        for (Object obj : zooCollection.getObjectList()) {
+            if (obj instanceof CompositeAnimal && ((CompositeAnimal) obj).getName().equals(name)) {
+                return (CompositeAnimal) obj;
+            }
+        }
+        return null;
+    }
+
+    private void setCurrentEnclosure(CompositeAnimal pCurrentEnclosure) {
+        currentEnclosure = pCurrentEnclosure;
     }
 }
 

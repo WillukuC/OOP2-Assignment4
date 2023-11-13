@@ -1,12 +1,24 @@
 package com.champlain.oop2.oop2assignment4;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnimalListController {
     @FXML
-    private Label enclosureNameLabel;
+    private ListView<Object> animalListView;
+
+    public static Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
+
+    @FXML
+    private void initialize() {
+        animalListView.getItems().setAll(aAnimals);
+    }
 
     @FXML
     protected void onViewEditButtonClick() {
@@ -29,4 +41,20 @@ public class AnimalListController {
     @FXML
     protected void onBackButtonClick() {
     }
+
+    public void displayListView() {
+        ObservableList<String> enclosureNames = FXCollections.observableArrayList();
+
+        for (Animal a : aAnimals) {
+            enclosureNames.add(a.getName());
+        }
+
+        animalListView.getItems().setAll(enclosureNames);
+        animalListView.refresh();
+    }
+
+
+//    public void setAnimals(Enclosure<Animal> pAnimals) {
+//        aAnimals = pAnimals;
+//    }
 }

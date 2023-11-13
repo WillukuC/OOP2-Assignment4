@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AnimalDetailsController {
+    public Button aBackButton;
+    public Button aSaveButton;
 
     /*@FXML
     private AnimalCollectionViewController aParent;*/
