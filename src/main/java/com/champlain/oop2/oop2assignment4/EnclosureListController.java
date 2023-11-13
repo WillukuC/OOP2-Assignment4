@@ -55,7 +55,7 @@ public class EnclosureListController {
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
-            nextStage.setTitle("Enclosure");
+            nextStage.setTitle(getSelectedEnclosure().toString());
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.showAndWait();
@@ -65,11 +65,10 @@ public class EnclosureListController {
             AnimalListController newAnimalViewController = fxmlLoader.getController();
             AnimalListController.aAnimals = getSelectedAnimals();
             newAnimalViewController.displayListView();
-
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
-            nextStage.setTitle("Enclosure");
+            nextStage.setTitle(getSelectedEnclosure().toString());
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.showAndWait();
