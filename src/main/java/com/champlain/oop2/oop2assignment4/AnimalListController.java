@@ -23,25 +23,6 @@ public class AnimalListController {
 
     private Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
 
-    public void openAnimalDetails(ActionEvent pEvent, Animal pAnimal) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalDetails-view.fxml"));
-        Parent view = fxmlLoader.load();
-        AnimalDetailsController newAnimalDetailsController = fxmlLoader.getController();
-        newAnimalDetailsController.setEnclosure(aAnimals);
-        if (pAnimal != null) {
-            newAnimalDetailsController.setAnimal(pAnimal);
-        }
-        Scene nextScene = new Scene(view);
-        Stage nextStage = new Stage();
-        nextStage.setScene(nextScene);
-        nextStage.setTitle("Add/Edit");
-        nextStage.initModality(Modality.WINDOW_MODAL);
-        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
-        nextStage.showAndWait();
-
-        displayListView();
-    }
-
     @FXML
     private void initialize() {
         animalListView.getItems().setAll(aAnimals);
@@ -77,7 +58,27 @@ public class AnimalListController {
     }
 
     @FXML
-    protected void onBackButtonClick() {
+    protected void onBackButtonClick(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+    }
+    public void openAnimalDetails(ActionEvent pEvent, Animal pAnimal) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalDetails-view.fxml"));
+        Parent view = fxmlLoader.load();
+        AnimalDetailsController newAnimalDetailsController = fxmlLoader.getController();
+        newAnimalDetailsController.setEnclosure(aAnimals);
+        if (pAnimal != null) {
+            newAnimalDetailsController.setAnimal(pAnimal);
+        }
+        Scene nextScene = new Scene(view);
+        Stage nextStage = new Stage();
+        nextStage.setScene(nextScene);
+        nextStage.setTitle("Add/Edit");
+        nextStage.initModality(Modality.WINDOW_MODAL);
+        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
+        nextStage.showAndWait();
+
+        displayListView();
     }
 
     public void displayListView() {

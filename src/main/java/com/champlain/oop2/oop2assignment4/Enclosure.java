@@ -29,14 +29,6 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
     }
 
     /**
-     * Removes specified Animal from the Enclosure
-     * @param pAnimal Animal to remove
-     */
-    public void removeAnimal(Animal pAnimal){
-        this.remove(pAnimal);
-    }
-
-    /**
      * Returns the name of the Enclosure
      * @return Enclosure name
      */
@@ -68,9 +60,5 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
             }
         }
         return allAnimals.toString();
-    }
-
-    public List<Animal> getList() {
-        return this;
     }
 }

@@ -42,8 +42,6 @@
     <AnchorPane prefHeight="400.0" prefWidth="402.0" VBox.vgrow="ALWAYS">
         <Button fx:id="viewButton" layoutX="261.0" layoutY="33.0" mnemonicParsing="false"
                 onAction="#onViewButtonClick" prefHeight="25.0" prefWidth="71.0" text="View"/>
-        <Button fx:id="resetButton" layoutX="261.0" layoutY="63.0" mnemonicParsing="false"
-                onAction="#onResetButtonClick" prefHeight="25.0" prefWidth="71.0" text="Reset"/>
         <Button fx:id="backExitButton" layoutX="261.0" layoutY="317.0" mnemonicParsing="false"
                 onAction="#onBackButtonClick" text="Back / Exit"/>
         <ListView fx:id="enclosuresListView" layoutX="33.0" layoutY="33.0" prefHeight="309.0" prefWidth="200.0"/>

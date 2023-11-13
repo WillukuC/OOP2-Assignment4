@@ -7,7 +7,7 @@ public class ZooSingleton implements AnimalCollection {
 
     private String aName;
 
-    private CompositeAnimal aZoo = null;
+    private CompositeAnimal aZoo;
 
     private ZooSingleton() {
         // Lions
