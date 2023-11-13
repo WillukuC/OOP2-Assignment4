@@ -21,13 +21,16 @@ public class AnimalListController {
     @FXML
     private ListView<Object> animalListView;
 
-    public static Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
+    private Enclosure<Animal> aAnimals = new Enclosure<>("Animals");
 
-    public void openAnimalDetails(ActionEvent pEvent) throws IOException {
+    public void openAnimalDetails(ActionEvent pEvent, Animal pAnimal) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalDetails-view.fxml"));
         Parent view = fxmlLoader.load();
         AnimalDetailsController newAnimalDetailsController = fxmlLoader.getController();
-        //newAnimalDetailsController.setCurrentEnclosure((CompositeAnimal) zooCollection.getObjectList().get(listIndex));
+        newAnimalDetailsController.setEnclosure(aAnimals);
+        if (pAnimal != null) {
+            newAnimalDetailsController.setAnimal(pAnimal);
+        }
         Scene nextScene = new Scene(view);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
@@ -35,6 +38,8 @@ public class AnimalListController {
         nextStage.initModality(Modality.WINDOW_MODAL);
         nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
         nextStage.showAndWait();
+
+        displayListView();
     }
 
     @FXML
@@ -43,20 +48,32 @@ public class AnimalListController {
     }
 
     @FXML
-    protected void onViewEditButtonClick(ActionEvent event) throws IOException {
-        openAnimalDetails(event);
+    protected void onViewEditButtonClick(ActionEvent event) throws Exception {
+        Animal passedAnimal = getCurrentlySelectedAnimal();
+        openAnimalDetails(event, passedAnimal);
+    }
 
+    private Animal getCurrentlySelectedAnimal() {
+        int i = animalListView.getSelectionModel().getSelectedIndex();
+        Animal passedAnimal = null;
+        if (i == -1){
+            throw new IllegalArgumentException("no");
+        } else {
+            passedAnimal = aAnimals.get(i);
+        }
+        return passedAnimal;
     }
 
     @FXML
     protected void onAddButtonClick(ActionEvent event) throws IOException {
-        openAnimalDetails(event);
+        openAnimalDetails(event, null);
+
     }
 
     @FXML
     protected void onRemoveButtonClick() {
-        Alert removeAlert = new Alert(Alert.AlertType.WARNING, "Remove");
-        removeAlert.showAndWait();
+        this.aAnimals.remove(getCurrentlySelectedAnimal());
+        displayListView();
     }
 
     @FXML
@@ -75,7 +92,7 @@ public class AnimalListController {
     }
 
 
-//    public void setAnimals(Enclosure<Animal> pAnimals) {
-//        aAnimals = pAnimals;
-//    }
+    public void setEnclosure(Enclosure<Animal> pAnimals) {
+        aAnimals = pAnimals;
+    }
 }

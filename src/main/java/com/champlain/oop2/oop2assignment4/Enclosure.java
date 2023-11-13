@@ -8,11 +8,6 @@ import java.util.List;
  */
 public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollection{
     /**
-     * List of the Animals in the Enclosure
-     */
-    private final List<Animal> aAnimals;
-
-    /**
      * Name of the Enclosure
      */
     private String aName;
@@ -22,7 +17,6 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
      * @param pName names the Enclosure upon initialization
      */
     public Enclosure(String pName) {
-        aAnimals = new ArrayList<>();
         aName = pName;
     }
 
@@ -31,7 +25,7 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
      * @param pAnimal Animal to add
      */
     public void addAnimal(Animal pAnimal){
-        this.aAnimals.add(pAnimal);
+        this.add(pAnimal);
     }
 
     /**
@@ -39,7 +33,7 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
      * @param pAnimal Animal to remove
      */
     public void removeAnimal(Animal pAnimal){
-        this.aAnimals.remove(pAnimal);
+        this.remove(pAnimal);
     }
 
     /**
@@ -67,9 +61,9 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
     @Override
     public String showAllAnimals() {
         StringBuilder allAnimals = new StringBuilder();
-        for (Object currentAnimal : aAnimals){
+        for (Object currentAnimal : this){
             allAnimals.append(currentAnimal.toString());
-            if (!(allAnimals.indexOf(String.valueOf(currentAnimal)) == aAnimals.size() - 1)) {
+            if (!(allAnimals.indexOf(String.valueOf(currentAnimal)) == size() - 1)) {
                 allAnimals.append(", ");
             }
         }
@@ -77,6 +71,6 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
     }
 
     public List<Animal> getList() {
-        return aAnimals;
+        return this;
     }
 }

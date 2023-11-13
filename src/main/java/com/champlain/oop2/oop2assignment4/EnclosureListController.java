@@ -63,7 +63,7 @@ public class EnclosureListController {
             FXMLLoader fxmlLoader = new FXMLLoader(ZooManagementApplication.class.getResource("animalList-view.fxml"));
             Parent view = fxmlLoader.load();
             AnimalListController newAnimalViewController = fxmlLoader.getController();
-            AnimalListController.aAnimals = getSelectedAnimals();
+            newAnimalViewController.setEnclosure(getSelectedAnimals());
             newAnimalViewController.displayListView();
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
