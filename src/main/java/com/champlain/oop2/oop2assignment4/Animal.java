@@ -50,22 +50,6 @@ public class Animal {
     }
 
     /**
-     * Returns the species of the Animal
-     * @return species of the Animal
-     */
-    public String getSpecies() {
-        return aSpecies;
-    }
-
-    /**
-     * Changes the species of the Animal
-     * @param pSpecies new species for the Animal
-     */
-    public void setSpecies(String pSpecies) {
-        aSpecies = pSpecies;
-    }
-
-    /**
      * Returns the weight of the Animal
      * @return weight of Animal
      */

@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,7 +50,7 @@ public class EnclosureListController {
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
-            nextStage.setTitle(getSelectedEnclosure().toString());
+            nextStage.setTitle(getSelectedEnclosure());
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.showAndWait();
@@ -67,7 +66,7 @@ public class EnclosureListController {
             Scene nextScene = new Scene(view);
             Stage nextStage = new Stage();
             nextStage.setScene(nextScene);
-            nextStage.setTitle(getSelectedEnclosure().toString());
+            nextStage.setTitle(getSelectedEnclosure());
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.showAndWait();

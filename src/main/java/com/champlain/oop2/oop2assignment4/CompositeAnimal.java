@@ -85,23 +85,6 @@ public class CompositeAnimal implements AnimalCollection {
     }
 
     /**
-     * Shows all the Collections in the current CompositeAnimal
-     *
-     * @return a String of all the Collections together
-     */
-    @Override
-    public String showAllAnimals() {
-        StringBuilder allAnimals = new StringBuilder();
-        for (Object currentCollection : aCollection) {
-            allAnimals.append(currentCollection.toString());
-            if (!(allAnimals.indexOf(String.valueOf(currentCollection)) == aCollection.size() - 1)) {
-                allAnimals.append(", ");
-            }
-        }
-        return allAnimals.toString();
-    }
-
-    /**
      * Accessor for aCollection
      *
      * @return the list of CompositeAnimal's contents

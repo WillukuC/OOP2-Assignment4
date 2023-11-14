@@ -45,20 +45,4 @@ public class Enclosure<Animal> extends ArrayList<Animal> implements AnimalCollec
     public void setName(String pName){
         this.aName = pName;
     }
-
-    /**
-     * Shows all the animals in the Enclosure
-     * @return String
-     */
-    @Override
-    public String showAllAnimals() {
-        StringBuilder allAnimals = new StringBuilder();
-        for (Object currentAnimal : this){
-            allAnimals.append(currentAnimal.toString());
-            if (!(allAnimals.indexOf(String.valueOf(currentAnimal)) == size() - 1)) {
-                allAnimals.append(", ");
-            }
-        }
-        return allAnimals.toString();
-    }
 }

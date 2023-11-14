@@ -70,11 +70,6 @@ public class ZooSingleton implements AnimalCollection {
         return aName;
     }
 
-    @Override
-    public String showAllAnimals() {
-        return null;
-    }
-
     public List<Object> getObjectList() {
         return aZoo.getList();
     }

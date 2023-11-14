@@ -3,16 +3,12 @@ package com.champlain.oop2.oop2assignment4;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AnimalDetailsController {
     public Button aBackButton;
     public Button aSaveButton;
-
-    /*@FXML
-    private AnimalCollectionViewController aParent;*/
 
     private Animal aAnimal = new Animal();
 
